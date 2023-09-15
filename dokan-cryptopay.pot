@@ -1,0 +1,75 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dokan - CryptoPay Withdrawal\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-07-05 06:15+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.6.4; wp-6.2.2\n"
+"X-Domain: dokan-cryptopay"
+
+#. Description of the plugin
+msgid "Add custom cryptocurrency withdrawal method to Dokan plugin"
+msgstr ""
+
+#: classes/DokanCryptoPayWithdrawal.php:172
+msgid "Address"
+msgstr ""
+
+#. Author of the plugin
+msgid "BeycanPress"
+msgstr ""
+
+#: index.php:57
+msgid "clicking here"
+msgstr ""
+
+#: index.php:32
+msgid "CryptoPay"
+msgstr ""
+
+#: index.php:34
+msgid "CryptoPay Lite"
+msgstr ""
+
+#. Name of the plugin
+msgid "Dokan - CryptoPay Withdrawal"
+msgstr ""
+
+#: index.php:57
+#, php-format
+msgid ""
+"Dokan - CryptoPay Withdrawal: This plugin is an extra feature plugin so it "
+"cannot do anything on its own. It needs CryptoPay to work. You can buy "
+"CryptoPay by %s."
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://beycanpress.com"
+msgstr ""
+
+#. URI of the plugin
+msgid "https://beycanpress.com/cryptopay"
+msgstr ""
+
+#: classes/DokanCryptoPayWithdrawal.php:323
+#: classes/DokanCryptoPayWithdrawal.php:324
+#, php-format
+msgid "Pay with %s"
+msgstr ""
+
+#: classes/DokanCryptoPayWithdrawal.php:156
+msgid "Payment currency"
+msgstr ""
+
+#: classes/DokanCryptoPayWithdrawal.php:140
+msgid "Payment network"
+msgstr ""
