@@ -341,10 +341,8 @@ class DokanCryptoPayWithdrawal
     public function runCryptoPay()
     {
         if ($this->key == 'cryptopay') {
-            echo Services::preparePaymentProcess('dokan_withdraw', false, [
-                'autoSelectNetwork' => true,
-            ]);
-        } elseif ($this->key == 'cryptopay_lite') {
+            echo Services::preparePaymentProcess('dokan_withdraw', false);
+        } else {
             echo LiteServices::preparePaymentProcess('dokan_withdraw', false);
         } 
     }
