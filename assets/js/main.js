@@ -15,7 +15,6 @@
             let key = $(this).data('key');
             let parent = $(this).closest('tr');
             let details = $(this).data('details');
-            let withdrawId = parent.find("th input[type=checkbox]").val();
             let approve = parent.find(".actions .button-group button:eq(0)");
             let amount = parent.find(".amount div").text().replace(/[^a-zA-Z0-9.,]/g, "").trim();
             let currency = DokanCryptoPay.currency
