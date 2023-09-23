@@ -12,7 +12,7 @@
  * Text Domain: dokan-cryptopay
  * Tags: Cryptopay, Cryptocurrency, WooCommerce, WordPress, MetaMask, Trust, Binance, Wallet, Ethereum, Bitcoin, Binance smart chain, Payment, Plugin, Gateway, Moralis, Converter, API, coin market cap, CMC
  * Requires at least: 5.0
- * Tested up to: 6.2
+ * Tested up to: 6.3
  * Requires PHP: 7.4
 */
 
@@ -54,7 +54,7 @@ add_action('plugins_loaded', function() {
 		add_action('admin_notices', function () {
 			?>
 				<div class="notice notice-error">
-					<p><?php echo sprintf(esc_html__('Dokan - CryptoPay Withdrawal: This plugin is an extra feature plugin so it cannot do anything on its own. It needs CryptoPay to work. You can buy CryptoPay by %s.', 'dokan-cryptopay'), '<a href="https://beycanpress.com/product/cryptopay-all-in-one-cryptocurrency-payments-for-wordpress/?utm_source=wp_org_addons" target="_blank">'.esc_html__('clicking here', 'dokan-cryptopay').'</a>'); ?></p>
+					<p><?php echo sprintf(esc_html__('Dokan - CryptoPay Withdrawal: This plugin is an extra feature plugin so it cannot do anything on its own. It needs CryptoPay to work. You can buy CryptoPay by %s.', 'dokan-cryptopay'), '<a href="https://beycanpress.com/product/cryptopay-all-in-one-cryptocurrency-payments-for-wordpress/?utm_source=wp_org_addons&utm_medium=dokan" target="_blank">'.esc_html__('clicking here', 'dokan-cryptopay').'</a>'); ?></p>
 				</div>
 			<?php
 		});
