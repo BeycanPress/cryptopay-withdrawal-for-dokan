@@ -13,14 +13,14 @@ Cryptocurrency Payment Withdrawal Method for Dokan, Cryptocurrency payments for 
 
 == Description ==
 
-First of all, we would like to point out that this plugin is not a standalone plugin. This plugin is a cryptocurrency payment withdrawal method for Dokan. In other words, your users can request withdrawals with cryptocurrencies through Dokan. But this plugin is a plugin for CryptoPay and a **<a href="https://beycanpress.com/cryptopay">Cryptocurrency payment withdrawal</a>** plugin for Dokan. So, CryptoPay is the main plugin that manages the process of requesting and sending payments with cryptocurrencies from your WordPress site with the Dokan plugin. Therefore, users must have both plugins. While this plugin is the cryptocurrency payment withdrawal method for Dokan, you can receive **<a href="https://beycanpress.com/cryptopay">cryptocurrency payments for WordPress</a>** in general with the main plugin.
+First of all, we would like to point out that this plugin is not a standalone plugin. This plugin is a cryptocurrency payment withdrawal method for Dokan. In other words, your users can request withdrawals with cryptocurrencies through Dokan. But this plugin is a plugin for CryptoPay and a **<a href="https://beycanpress.com/cryptopay/?utm_source=wporg_readme&utm_medium=cryptopay_dokan">Cryptocurrency payment withdrawal</a>** plugin for Dokan. So, CryptoPay is the main plugin that manages the process of requesting and sending payments with cryptocurrencies from your WordPress site with the Dokan plugin. Therefore, users must have both plugins. While this plugin is the cryptocurrency payment withdrawal method for Dokan, you can receive **<a href="https://beycanpress.com/cryptopay/?utm_source=wporg_readme&utm_medium=cryptopay_dokan">cryptocurrency payments for WordPress</a>** in general with the main plugin.
 
 What is CryptoPay?
 <iframe width="560" height="315" src="https://www.youtube.com/embed/3vaoFL4XG10" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 Review CryptoPay Lite: **<a href="https://wordpress.org/plugins/cryptopay-wc-lite/">Cryptocurrency payment withdrawal for Dokan</a>**
 
-Review CryptoPay Premium: **<a href="https://beycanpress.com/cryptopay">Cryptocurrency payments for WooCommerce</a>**
+Review CryptoPay Premium: **<a href="https://beycanpress.com/cryptopay/?utm_source=wporg_readme&utm_medium=cryptopay_dokan">Cryptocurrency payments for WooCommerce</a>**
 
 Review Dokan: **<a href="https://wordpress.org/plugins/dokan-lite/">Dokan</a>**
 
