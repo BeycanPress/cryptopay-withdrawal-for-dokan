@@ -17,6 +17,7 @@
 */
 
 use \BeycanPress\CryptoPay\Loader;
+use \BeycanPress\CryptoPay\PluginHero\Plugin;
 use \BeycanPress\CryptoPayLite\Loader as LiteLoader;
 
 define('DOKAN_CRYPTOPAY_FILE', __FILE__);
@@ -34,22 +35,27 @@ add_action('plugins_loaded', function() {
 			$gateway = new DokanCryptoPayWithdrawal(esc_html__('CryptoPay Lite', 'dokan-cryptopay'), 'cryptopay_lite');
 		}
 
-		add_action('admin_enqueue_scripts', function () use ($gateway) {
-			wp_enqueue_script('dokan-cryptopay', plugin_dir_url(__FILE__) . 'assets/js/main.js', ['jquery'], DOKAN_CRYPTOPAY_VERSION, true);
-			wp_localize_script('dokan-cryptopay', 'DokanCryptoPay', [
-				'currency' => get_woocommerce_currency(),
-				'apiUrl' => home_url('/wp-json/dokan/v1/withdraw/')
-			]);
-			
-			wp_enqueue_style('dokan-cryptopay', plugin_dir_url(__FILE__) . 'assets/css/main.css', [], DOKAN_CRYPTOPAY_VERSION);
-			?>
-				<div class="dokan-cryptopay-modal">
-					<div class="dokan-cryptopay-modal-content">
-						<?php $gateway->runCryptoPay(); ?>
+		if (isset($_GET['page']) && $_GET['page'] === 'dokan') {
+
+			add_action('admin_enqueue_scripts', function () {
+				wp_enqueue_script('dokan-cryptopay', plugin_dir_url(__FILE__) . 'assets/js/main.js', ['jquery'], DOKAN_CRYPTOPAY_VERSION, true);
+				wp_localize_script('dokan-cryptopay', 'DokanCryptoPay', [
+					'currency' => get_woocommerce_currency(),
+					'apiUrl' => home_url('/wp-json/dokan/v1/withdraw/')
+				]);
+				
+				wp_enqueue_style('dokan-cryptopay', plugin_dir_url(__FILE__) . 'assets/css/main.css', [], DOKAN_CRYPTOPAY_VERSION);
+			});
+			add_action('admin_footer', function() use ($gateway) {
+				?>
+					<div class="dokan-cryptopay-modal">
+						<div class="dokan-cryptopay-modal-content">
+							<?php $gateway->runCryptoPay(); ?>
+						</div>
 					</div>
-				</div>
-			<?php
-		});
+				<?php
+			});
+		}
 	} else {
 		add_action('admin_notices', function () {
 			?>

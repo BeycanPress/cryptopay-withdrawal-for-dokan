@@ -47,11 +47,13 @@ class DokanCryptoPayWithdrawal
         }
 
         if ($this->key == 'cryptopay') {
-            Hook::addAction('receiver_dokan_withdraw', function (string $receiver, object $data) {
+            Services::registerAddon($this->key);
+            Hook::addAction('receiver_' . $this->key, function (string $receiver, object $data) {
                 return $data->params->dokanCrytpoPayDetails->address;
             }, 10, 2);
         } else {
-            LiteHook::addAction('receiver_dokan_withdraw', function (string $receiver, object $data) {
+            LiteServices::registerAddon($this->key);
+            LiteHook::addAction('receiver_' . $this->key, function (string $receiver, object $data) {
                 return $data->params->dokanCrytpoPayDetails->address;
             }, 10, 2);
         }
@@ -341,9 +343,9 @@ class DokanCryptoPayWithdrawal
     public function runCryptoPay()
     {
         if ($this->key == 'cryptopay') {
-            echo Services::preparePaymentProcess('dokan_withdraw', false);
+            echo Services::preparePaymentProcess($this->key, false);
         } else {
-            echo LiteServices::preparePaymentProcess('dokan_withdraw', false);
+            echo LiteServices::preparePaymentProcess($this->key, false);
         } 
     }
 }
