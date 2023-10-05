@@ -15,15 +15,21 @@
             let key = $(this).data('key');
             let parent = $(this).closest('tr');
             let details = $(this).data('details');
+            let currency = DokanCryptoPay.currency;
             let approve = parent.find(".actions .button-group button:eq(0)");
-            let amount = parent.find(".amount div").text().replace(/[^a-zA-Z0-9.,]/g, "").trim();
-            let currency = DokanCryptoPay.currency
+            let amount = parseFloat(parent.find(".amount div").text().replace(/[^a-zA-Z0-9.,]/g, "").trim());
             
+            details = {
+                address: details.address,
+                network: JSON.parse(details.network),
+                currency: JSON.parse(details.currency),
+            }
+
             modal.show();
 
             if (key == 'cryptopay') {
                 CryptoPay.networks = [
-                    JSON.parse(details.network),
+                    details.network,
                 ];
 
                 CryptoPayApp = CryptoPay.startPayment({
@@ -40,7 +46,7 @@
                 }
             } else if (key == 'cryptopay_lite') {
                 CryptoPayLite.networks = [
-                    JSON.parse(details.network),
+                    details.network,
                 ];
 
                 CryptoPayApp = CryptoPayLite.startPayment({
