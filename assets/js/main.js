@@ -39,7 +39,7 @@
                     dokanCrytpoPayDetails: details,
                 });
     
-                CryptoPay.hooks.transactionSent = (n, tx) => {
+                CryptoPayApp.events.add('transactionSent', (n, c, tx) => {
                     approve.trigger('click');
                     cpHelpers.successPopup(CryptoPay.lang.transactionSent, `
                         <a href="${tx.getUrl()}" target="_blank">
@@ -49,8 +49,7 @@
                         modal.hide();
                         CryptoPayApp.reset();
                     });
-
-                }
+                });
             } else if (key == 'cryptopay_lite') {
                 CryptoPayLite.networks = [
                     details.network,
