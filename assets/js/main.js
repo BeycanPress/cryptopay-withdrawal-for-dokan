@@ -39,10 +39,17 @@
                     dokanCrytpoPayDetails: details,
                 });
     
-                CryptoPay.callbacks.transactionSent = (n, txId) => {
-                    modal.hide();
-                    CryptoPayApp.reset();
+                CryptoPay.hooks.transactionSent = (n, tx) => {
                     approve.trigger('click');
+                    cpHelpers.successPopup(CryptoPay.lang.transactionSent, `
+                        <a href="${tx.getUrl()}" target="_blank">
+                            ${CryptoPay.lang.openInExplorer}
+                        </a>
+                    `).then(() => {
+                        modal.hide();
+                        CryptoPayApp.reset();
+                    });
+
                 }
             } else if (key == 'cryptopay_lite') {
                 CryptoPayLite.networks = [
@@ -56,10 +63,17 @@
                     dokanCrytpoPayDetails: details,
                 });
     
-                CryptoPayLite.callbacks.transactionSent = (n, txId) => {
-                    modal.hide();
-                    CryptoPayApp.reset();
+                CryptoPayLite.hooks.transactionSent = (n, tx) => {
                     approve.trigger('click');
+                    console.log('sa')
+                    cpHelpers.successPopup(CryptoPayLite.lang.transactionSent, `
+                        <a href="${tx.getUrl()}" target="_blank">
+                            ${CryptoPayLite.lang.openInExplorer}
+                        </a>
+                    `).then(() => {
+                        modal.hide();
+                        CryptoPayApp.reset();
+                    });
                 }
             }
             
