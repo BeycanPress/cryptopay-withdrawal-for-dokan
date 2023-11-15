@@ -48,12 +48,12 @@ class DokanCryptoPayWithdrawal
 
         if ($this->key == 'cryptopay') {
             Services::registerAddon($this->key);
-            Hook::addAction('receiver_' . $this->key, function (string $receiver, object $data) {
+            Hook::addFilter('receiver_' . $this->key, function (string $receiver, object $data) {
                 return $data->params->dokanCrytpoPayDetails->address;
             }, 10, 2);
         } else {
             LiteServices::registerAddon($this->key);
-            LiteHook::addAction('receiver_' . $this->key, function (string $receiver, object $data) {
+            LiteHook::addFilter('receiver_' . $this->key, function (string $receiver, object $data) {
                 return $data->params->dokanCrytpoPayDetails->address;
             }, 10, 2);
         }
