@@ -39,7 +39,7 @@
                     dokanCrytpoPayDetails: details,
                 });
     
-                CryptoPayApp.events.add('transactionSent', (n, c, tx) => {
+                CryptoPayApp.events.add('transactionSent', (n, o, tx) => {
                     approve.trigger('click');
                     cpHelpers.successPopup(CryptoPay.lang.transactionSent, `
                         <a href="${tx.getUrl()}" target="_blank">
