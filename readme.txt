@@ -2,7 +2,7 @@
 Contributors: BeycanPress
 Tags: Bitcoin, Ethereum, Binance Smart Chain, Blockchain, Networks, Cryptocurrency, Payments, Gateway, WordPress, Dokan
 Requires at least: 5.0
-Tested up to: 6.4.1
+Tested up to: 6.4.2
 Requires PHP: 7.4
 Stable Tag: 1.0.1
 Version: 1.0.1
