@@ -44,5 +44,8 @@ You can easily translate with Loco translate.
 
 == Changelog ==
 
+= 1.0.1 =
+*Improved: For CryptoPay 2.0.0
+
 = 1.0.0 =
 * Plugin released.
