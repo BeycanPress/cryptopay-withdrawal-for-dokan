@@ -54,7 +54,7 @@ class DokanCryptoPayWithdrawal
             }, 10, 2);
         } else {
             LiteServices::registerAddon($this->key);
-            Hook::addFilter('apply_discount_' . $this->key, '__return_false');
+            LiteHook::addFilter('apply_discount_' . $this->key, '__return_false');
             LiteHook::addFilter('receiver_' . $this->key, function (string $receiver, object $data) {
                 return $data->params->dokanCrytpoPayDetails->address;
             }, 10, 2);
