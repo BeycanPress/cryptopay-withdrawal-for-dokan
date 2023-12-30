@@ -27,7 +27,18 @@ add_action('plugins_loaded', function() {
 	require_once __DIR__ . '/classes/DokanCryptoPayWithdrawal.php';
 	load_plugin_textdomain('dokan-cryptopay', false, basename(__DIR__) . '/languages');
 
-	if (function_exists('dokan') && (class_exists(Loader::class) || class_exists(LiteLoader::class))){
+	if (!function_exists('dokan')) {
+		add_action('admin_notices', function () {
+			?>
+				<div class="notice notice-error">
+					<p><?php echo sprintf(esc_html__('Dokan - CryptoPay Withdrawal: This plugin is an extra feature plugin so it cannot do anything on its own. It needs Dokan to work. You can buy download Dokan by %s.', 'dokan-cryptopay'), '<a href="https://wordpress.org/plugins/dokan-lite/" target="_blank">'.esc_html__('clicking here', 'dokan-cryptopay').'</a>'); ?></p>
+				</div>
+			<?php
+		});
+		return;
+	}
+
+	if ((class_exists(Loader::class) || class_exists(LiteLoader::class))){
 		if (class_exists(Loader::class)) {
 			$gateway = new DokanCryptoPayWithdrawal(esc_html__('CryptoPay', 'dokan-cryptopay'), 'cryptopay');
 		} elseif (class_exists(LiteLoader::class)) {
