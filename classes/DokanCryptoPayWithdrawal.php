@@ -1,27 +1,33 @@
-<?php 
+<?php
 
-use \BeycanPress\CryptoPay\Services;
-use \BeycanPress\CryptoPay\PluginHero\Hook;
-use \BeycanPress\CryptoPayLite\Services as LiteServices;
-use \BeycanPress\CryptoPayLite\PluginHero\Hook as LiteHook;
+declare(strict_types=1);
 
+// @phpcs:disable Generic.Files.InlineHTML
+// @phpcs:disable Generic.Files.LineLength
+
+use BeycanPress\CryptoPay\Helpers;
+use BeycanPress\CryptoPay\Payment;
+use BeycanPress\CryptoPay\PluginHero\Hook;
+use BeycanPress\CryptoPayLite\Services as LiteServices;
+use BeycanPress\CryptoPayLite\PluginHero\Hook as LiteHook;
+
+// @phpcs:ignore
 class DokanCryptoPayWithdrawal
 {
+    /**
+     * @var string
+     */
+    private string $title;
 
     /**
      * @var string
      */
-    private $title;
+    private string $key;
 
     /**
-     * @var string
+     * @var array<mixed>
      */
-    private $key;
-
-    /**
-     * @var array
-     */
-    private $currentNetwork;
+    private array $currentNetwork;
 
     /**
      * @param string $title
@@ -47,7 +53,7 @@ class DokanCryptoPayWithdrawal
         }
 
         if ($this->key == 'cryptopay') {
-            Services::registerAddon($this->key);
+            Helpers::registerIntegration($this->key);
             Hook::addFilter('apply_discount_' . $this->key, '__return_false');
             Hook::addFilter('receiver_' . $this->key, function (string $receiver, object $data) {
                 return $data->params->dokanCrytpoPayDetails->address;
@@ -62,16 +68,16 @@ class DokanCryptoPayWithdrawal
     }
 
     /**
-     * @param array $methods
-     * @return array
+     * @param array<string,array<string,mixed>> $methods
+     * @return array<string,array<string,mixed>>
      */
-    public function addWithdrawMethod(array $methods) : array
+    public function addWithdrawMethod(array $methods): array
     {
         $methods[$this->key] = array(
             'title'    => $this->title,
             'callback' => [$this, 'userSettingForm'],
         );
-    
+
         return $methods;
     }
 
@@ -80,21 +86,21 @@ class DokanCryptoPayWithdrawal
      * @param string $methodKey
      * @return string
      */
-    public function addMethodIcon(string $methodIcon, string $methodKey) : string
+    public function addMethodIcon(string $methodIcon, string $methodKey): string
     {
         if ($methodKey == $this->key) {
             $methodIcon = DOKAN_CRYPTOPAY_URL . 'assets/images/icon.svg';
         }
-    
+
         return $methodIcon;
     }
 
     /**
      * @param object $network
-     * @param array $networkItem
+     * @param array<mixed> $networkItem
      * @return boolean
      */
-    private function isSelected(object $network, array $networkItem) : bool
+    private function isSelected(object $network, array $networkItem): bool
     {
         if ($this->currentNetwork) {
             return false;
@@ -119,29 +125,27 @@ class DokanCryptoPayWithdrawal
     }
 
     /**
-     * @param array $args
+     * @param array<mixed> $args
      * @return void
      */
-    public function userSettingForm(array $args) : void
+    public function userSettingForm(array $args): void
     {
-        global $current_user;
-
         $settings = isset($args['payment'][$this->key]) ? $args['payment'][$this->key] : [];
         $network = isset($settings['network']) ? json_decode($settings['network']) : (object) [];
         $currency = isset($settings['currency']) ? json_decode($settings['currency']) : (object) [];
         $address = isset($settings['address']) ? $settings['address'] : '';
 
         if ($this->key == 'cryptopay') {
-            $networks = Services::getNetworks();
+            $networks = Helpers::getNetworks()->toArray();
         } else {
             $networks = LiteServices::getNetworks();
         }
-        
+
         ?>
             <div class="dokan-form-group">
                 <div>
                     <label>
-                        <?php esc_html_e( 'Payment network', 'dokan-cryptopay' ); ?>
+                        <?php esc_html_e('Payment network', 'dokan-cryptopay'); ?>
                     </label>
                 </div>
                 <div class="dokan-w12">
@@ -157,7 +161,7 @@ class DokanCryptoPayWithdrawal
             <div class="dokan-form-group">
                 <div>
                     <label>
-                        <?php esc_html_e( 'Payment currency', 'dokan-cryptopay' ); ?>
+                        <?php esc_html_e('Payment currency', 'dokan-cryptopay'); ?>
                     </label>
                 </div>
                 <div class="dokan-w12">
@@ -173,11 +177,11 @@ class DokanCryptoPayWithdrawal
             <div class="dokan-form-group">
                 <div>
                     <label>
-                        <?php esc_html_e( 'Address', 'dokan-cryptopay' ); ?>
+                        <?php esc_html_e('Address', 'dokan-cryptopay'); ?>
                     </label>
                 </div>
                 <div class="dokan-w12">
-                    <input value="<?php echo esc_attr( $address ); ?>" name="settings[<?php echo esc_attr($this->key) ?>][address]" class="dokan-form-control" type="text">
+                    <input value="<?php echo esc_attr($address); ?>" name="settings[<?php echo esc_attr($this->key) ?>][address]" class="dokan-form-control" type="text">
                 </div>
             </div>
             <script>
@@ -192,14 +196,15 @@ class DokanCryptoPayWithdrawal
     }
 
     /**
-     * @param array $dokanSettings
+     * @param array<mixed> $dokanSettings
      * @param string $storeId
-     * @return array
+     * @return array<mixed>
      */
-    public function saveSettings(array $dokanSettings, string $storeId) : array
+    public function saveSettings(array $dokanSettings, string $storeId): array
     {
+        /** @var array $postData */
         $postData = wp_unslash($_POST);
-        if (wp_verify_nonce($postData['_wpnonce'], 'dokan_payment_settings_nonce')){
+        if (wp_verify_nonce($postData['_wpnonce'], 'dokan_payment_settings_nonce')) {
             if (isset($postData['settings'][$this->key])) {
                 $dokanSettings['payment'][$this->key] = array_map('sanitize_text_field', $postData['settings'][$this->key]);
                 $network = json_decode($dokanSettings['payment'][$this->key]['network']);
@@ -210,30 +215,29 @@ class DokanCryptoPayWithdrawal
         }
 
         return $dokanSettings;
-
     }
 
     /**
-     * @param array $activePaymentMethods
-     * @return array
+     * @param array<string> $activePaymentMethods
+     * @return array<string>
      */
-    public function activePaymentMethods(array $activePaymentMethods) : array
+    public function activePaymentMethods(array $activePaymentMethods): array
     {
         $settings = get_user_meta(dokan_get_current_user_id(), 'dokan_profile_settings');
         $settings = isset($settings[0]['payment'][$this->key]) ? $settings[0]['payment'][$this->key] : [];
-        
+
         if (isset($settings['address']) && !empty($settings['address'])) {
             array_push($activePaymentMethods, $this->key);
         }
-    
+
         return $activePaymentMethods;
     }
 
     /**
-     * @param array $paymentMethods
-     * @return array
+     * @param array<string> $paymentMethods
+     * @return array<string>
      */
-    public function withdrawPaymentMethods(array $paymentMethods) : array
+    public function withdrawPaymentMethods(array $paymentMethods): array
     {
         $settings = get_user_meta(dokan_get_current_user_id(), 'dokan_profile_settings');
         $settings = isset($settings[0]['payment'][$this->key]) ? $settings[0]['payment'][$this->key] : [];
@@ -246,11 +250,11 @@ class DokanCryptoPayWithdrawal
     }
 
     /**
-     * @param array $requiredFields
+     * @param array<string> $requiredFields
      * @param string $paymentMethodId
-     * @return array
+     * @return array<string>
      */
-    public function addWithdrawInPaymentMethodList(array $requiredFields, string $paymentMethodId) : array
+    public function addWithdrawInPaymentMethodList(array $requiredFields, string $paymentMethodId): array
     {
         if ($this->key == $paymentMethodId) {
             $requiredFields = ['address'];
@@ -264,7 +268,7 @@ class DokanCryptoPayWithdrawal
      * @param string $methodKey
      * @return string
      */
-    public function addWithdrawMethodAdditionalInfo(string $methodInfo, string $methodKey) : string
+    public function addWithdrawMethodAdditionalInfo(string $methodInfo, string $methodKey): string
     {
         if ($this->key == $methodKey) {
             $settings       = get_user_meta(dokan_get_current_user_id(), 'dokan_profile_settings');
@@ -272,7 +276,7 @@ class DokanCryptoPayWithdrawal
             $cryptoPay      = isset($paymentMethods[$methodKey]) ? $paymentMethods[$methodKey] : [];
             if (isset($cryptoPay['network'])) {
                 $network    = json_decode($cryptoPay['network'], true);
-                $methodInfo = empty($cryptoPay['address']) ? '': sprintf('( %1$s - %2$s )', $network['name'], $cryptoPay['address']);
+                $methodInfo = empty($cryptoPay['address']) ? '' : sprintf('( %1$s - %2$s )', $network['name'], $cryptoPay['address']);
             }
         }
 
@@ -282,7 +286,7 @@ class DokanCryptoPayWithdrawal
     /**
      * @return void
      */
-    public function withdrawDetails() : void
+    public function withdrawDetails(): void
     {
         ?>
             <script>
@@ -342,12 +346,12 @@ class DokanCryptoPayWithdrawal
     /**
      * @return void
      */
-    public function runCryptoPay()
+    public function runCryptoPay(): void
     {
         if ($this->key == 'cryptopay') {
-            echo Services::preparePaymentProcess($this->key, false);
+            echo (new Payment($this->key))->setConfirmation(false);
         } else {
             echo LiteServices::preparePaymentProcess($this->key, false);
-        } 
+        }
     }
 }
