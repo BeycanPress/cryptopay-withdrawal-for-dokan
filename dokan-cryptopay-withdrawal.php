@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+defined('ABSPATH') || exit;
+
 // @phpcs:disable PSR1.Files.SideEffects
 // @phpcs:disable PSR12.Files.FileHeader
 // @phpcs:disable Generic.Files.LineLength
