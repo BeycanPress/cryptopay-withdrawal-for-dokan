@@ -9,7 +9,7 @@ declare(strict_types=1);
 /**
  * Plugin Name: Dokan - CryptoPay Withdrawal
  * Version:     1.0.1
- * Plugin URI:  https://beycanpress.com/cryptopay
+ * Plugin URI:  https://beycanpress.com/cryptopay/
  * Description: Add custom cryptocurrency withdrawal method to Dokan plugin
  * Author:      BeycanPress LLC
  * Author URI:  https://beycanpress.com
