@@ -8,6 +8,7 @@ declare(strict_types=1);
 use BeycanPress\CryptoPay\Helpers;
 use BeycanPress\CryptoPay\Payment;
 use BeycanPress\CryptoPay\PluginHero\Hook;
+use BeycanPress\CryptoPay\Types\Data\PaymentDataType;
 use BeycanPress\CryptoPayLite\Services as LiteServices;
 use BeycanPress\CryptoPayLite\PluginHero\Hook as LiteHook;
 
@@ -25,9 +26,9 @@ class DokanCryptoPayWithdrawal
     private string $key;
 
     /**
-     * @var array<mixed>
+     * @var array<mixed>|null
      */
-    private array $currentNetwork;
+    private ?array $currentNetwork = null;
 
     /**
      * @param string $title
@@ -52,17 +53,25 @@ class DokanCryptoPayWithdrawal
             add_action('admin_print_footer_scripts', [$this, 'withdrawDetails'], 99);
         }
 
-        if ($this->key == 'cryptopay') {
+        if ($this->key == 'dokan_cryptopay') {
             Helpers::registerIntegration($this->key);
             Hook::addFilter('apply_discount_' . $this->key, '__return_false');
-            Hook::addFilter('receiver_' . $this->key, function (string $receiver, object $data) {
-                return $data->params->dokanCrytpoPayDetails->address;
+            Hook::addFilter('receiver_' . $this->key, function (string $receiver, PaymentDataType $data) {
+                if ($data->getParams()->get('receiver')) {
+                    return $data->getParams()->get('receiver');
+                }
+
+                return $receiver;
             }, 10, 2);
         } else {
             LiteServices::registerAddon($this->key);
             LiteHook::addFilter('apply_discount_' . $this->key, '__return_false');
             LiteHook::addFilter('receiver_' . $this->key, function (string $receiver, object $data) {
-                return $data->params->dokanCrytpoPayDetails->address;
+                if (isset($data->params->receiver)) {
+                    return $data->params->receiver;
+                }
+
+                return $receiver;
             }, 10, 2);
         }
     }
@@ -135,7 +144,7 @@ class DokanCryptoPayWithdrawal
         $currency = isset($settings['currency']) ? json_decode($settings['currency']) : (object) [];
         $address = isset($settings['address']) ? $settings['address'] : '';
 
-        if ($this->key == 'cryptopay') {
+        if ($this->key == 'dokan_cryptopay') {
             $networks = Helpers::getNetworks()->toArray();
         } else {
             $networks = LiteServices::getNetworks();
@@ -344,14 +353,14 @@ class DokanCryptoPayWithdrawal
     }
 
     /**
-     * @return void
+     * @return string
      */
-    public function runCryptoPay(): void
+    public function runCryptoPay(): string
     {
-        if ($this->key == 'cryptopay') {
-            echo (new Payment($this->key))->setConfirmation(false);
+        if ($this->key == 'dokan_cryptopay') {
+            return (new Payment($this->key))->setConfirmation(false)->html();
         } else {
-            echo LiteServices::preparePaymentProcess($this->key, false);
+            return LiteServices::preparePaymentProcess($this->key, false);
         }
     }
 }

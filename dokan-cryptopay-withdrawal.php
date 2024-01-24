@@ -52,10 +52,10 @@ add_action('plugins_loaded', function (): void {
                     printf('<div class="%1$s"><p>%2$s</p></div>', esc_attr($class), esc_html($message));
                 });
             } else {
-                $gateway = new DokanCryptoPayWithdrawal(esc_html__('CryptoPay', 'dokan-cryptopay'), 'cryptopay');
+                $gateway = new DokanCryptoPayWithdrawal(esc_html__('CryptoPay', 'dokan-cryptopay'), 'dokan_cryptopay');
             }
         } elseif (class_exists(LiteLoader::class)) {
-            $gateway = new DokanCryptoPayWithdrawal(esc_html__('CryptoPay Lite', 'dokan-cryptopay'), 'cryptopay_lite');
+            $gateway = new DokanCryptoPayWithdrawal(esc_html__('CryptoPay Lite', 'dokan-cryptopay'), 'dokan_cryptopay_lite');
         }
 
         if (isset($_GET['page']) && $_GET['page'] === 'dokan') {

@@ -7,7 +7,9 @@
         $(window).on('click', function(e) {
             if (e.target == modal[0]) {
                 modal.hide();
-                CryptoPayApp.reset();
+                if (CryptoPayApp.reset) {
+                    CryptoPayApp.reset();
+                }
             }
         });
 
@@ -20,34 +22,39 @@
             let amount = parseFloat(parent.find(".amount div").text().replace(/[^a-zA-Z0-9.,]/g, "").trim());
             
             details = {
-                address: details.address,
+                receiver: details.address,
                 network: JSON.parse(details.network),
                 currency: JSON.parse(details.currency),
             }
 
             modal.show();
 
-            if (key == 'cryptopay') {
-                CryptoPay.networks = [
-                    details.network,
-                ];
-
-                CryptoPayApp = CryptoPay.startPayment({
+            if (key == 'dokan_cryptopay') {
+                let order = {
                     amount,
                     currency,
-                }, {
-                    dokanCrytpoPayDetails: details,
-                });
-    
-                CryptoPayApp.events.add('transactionSent', (n, o, tx) => {
+                }
+
+                let params = {
+                    receiver: details.receiver,
+                }
+
+                if (!CryptoPayApp) {
+                    CryptoPayApp = window.CryptoPayApp.start(order, params);
+                } else {
+                    CryptoPayApp.reStart(order, params);
+                }
+
+                CryptoPayApp.store.config.set('networks', [details.network]);
+
+                window.CryptoPayApp.events.add('transactionReceived', ({transaction}) => {
                     approve.trigger('click');
-                    cpHelpers.successPopup(CryptoPay.lang.transactionSent, `
-                        <a href="${tx.getUrl()}" target="_blank">
-                            ${CryptoPay.lang.openInExplorer}
+                    cpHelpers.successPopup(window.CryptoPayLang.transactionSent, `
+                        <a href="${transaction.getUrl()}" target="_blank">
+                            ${window.CryptoPayLang.openInExplorer}
                         </a>
                     `).then(() => {
                         modal.hide();
-                        CryptoPayApp.reset();
                     });
                 });
             } else if (key == 'cryptopay_lite') {
@@ -59,12 +66,11 @@
                     amount,
                     currency,
                 }, {
-                    dokanCrytpoPayDetails: details,
+                    receiver: details.receiver,
                 });
     
                 CryptoPayLite.hooks.transactionSent = (n, tx) => {
                     approve.trigger('click');
-                    console.log('sa')
                     cpHelpers.successPopup(CryptoPayLite.lang.transactionSent, `
                         <a href="${tx.getUrl()}" target="_blank">
                             ${CryptoPayLite.lang.openInExplorer}
