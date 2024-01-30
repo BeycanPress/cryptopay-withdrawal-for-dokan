@@ -2,13 +2,15 @@
 
 declare(strict_types=1);
 
+defined('ABSPATH') || exit;
+
 // @phpcs:disable PSR1.Files.SideEffects
 // @phpcs:disable PSR12.Files.FileHeader
 // @phpcs:disable Generic.Files.LineLength
 
 /**
  * Plugin Name: Dokan - CryptoPay Withdrawal
- * Version:     1.0.1
+ * Version:     1.0.2
  * Plugin URI:  https://beycanpress.com/cryptopay/
  * Description: Add custom cryptocurrency withdrawal method to Dokan plugin
  * Author:      BeycanPress LLC
@@ -27,7 +29,7 @@ use BeycanPress\CryptoPay\Helpers;
 use BeycanPress\CryptoPayLite\Loader as LiteLoader;
 
 define('DOKAN_CRYPTOPAY_FILE', __FILE__);
-define('DOKAN_CRYPTOPAY_VERSION', '1.0.1');
+define('DOKAN_CRYPTOPAY_VERSION', '1.0.2');
 define('DOKAN_CRYPTOPAY_URL', plugin_dir_url(__FILE__));
 
 add_action('plugins_loaded', function (): void {

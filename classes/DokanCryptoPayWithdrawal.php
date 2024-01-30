@@ -2,6 +2,9 @@
 
 declare(strict_types=1);
 
+defined('ABSPATH') || exit;
+
+// @phpcs:disable PSR1.Files.SideEffects
 // @phpcs:disable Generic.Files.InlineHTML
 // @phpcs:disable Generic.Files.LineLength
 
@@ -306,6 +309,7 @@ class DokanCryptoPayWithdrawal
                         return null;
                     }
                 }
+
                 function getCustomPaymentDetails(details, method, data) {
                     const url = window.location.href;
                     const regex = /[?&]status=(\w+)/;
@@ -347,7 +351,13 @@ class DokanCryptoPayWithdrawal
                     return details;
                 }
 
-                dokan.hooks.addFilter('dokan_get_payment_details', 'getCustomPaymentDetails', getCustomPaymentDetails, 33, 3);
+                dokan.hooks.addFilter(
+                    'dokan_get_payment_details',
+                    'getCustomPaymentDetails',
+                    getCustomPaymentDetails,
+                    33,
+                    3
+                );
             </script>
         <?php
     }

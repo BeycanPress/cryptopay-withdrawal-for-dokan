@@ -57,7 +57,7 @@
                         modal.hide();
                     });
                 });
-            } else if (key == 'cryptopay_lite') {
+            } else if (key == 'dokan_cryptopay_lite') {
                 CryptoPayLite.networks = [
                     details.network,
                 ];
