@@ -1,0 +1,144 @@
+[
+    {
+        "id" : 11155111,
+        "hexId" : "0xaa36a7",
+        "mainnetId" : 1,
+        "code" : "evmchains",
+        "name" : "Ethereum Sepolia Testnet",
+        "rpcUrl" : "https://sepolia.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161",
+        "explorerUrl" : "https://sepolia.etherscan.io/",
+        "nativeCurrency" : {
+            "symbol" : "ETH",
+            "decimals" : 18
+        },
+        "wallets": [
+            "metamask",
+            "trustwallet",
+            "bitget",
+            "okx",
+            "xdefi"
+        ],
+        "currencies": [
+            {
+                "symbol" : "ETH"
+            }
+        ]
+    },
+    {
+        "id" : 97,
+        "hexId" : "0x61",
+        "mainnetId" : 56,
+        "code" : "evmchains",
+        "name" : "BNB Smart Chain Testnet",
+        "rpcUrl" : "https://bsc-testnet.publicnode.com",
+        "explorerUrl" : "https://testnet.bscscan.com/",
+        "nativeCurrency" : {
+            "symbol" : "BNB",
+            "decimals" : 18
+        },
+        "wallets": [
+            "metamask",
+            "trustwallet",
+            "bitget",
+            "okx",
+            "xdefi",
+            "binancewallet"
+        ],
+        "currencies": [
+            {
+                "symbol" : "BNB"
+            },
+            {
+                "symbol" : "BUSD",
+                "address" : "0xeD24FC36d5Ee211Ea25A80239Fb8C4Cfd80f12Ee"
+            },
+            {
+                "symbol" : "USDT",
+                "address" : "0xba6670261a05b8504e8ab9c45d97a8ed42573822"
+            }
+        ]
+    },
+    {
+        "id" : 43113,
+        "hexId" : "0xa869",
+        "mainnetId" : 43114,
+        "code" : "evmchains",
+        "name" : "Avalanche FUJI C-Chain Testnet",
+        "rpcUrl" : "https://api.avax-test.network/ext/bc/C/rpc",
+        "explorerUrl" : "https://cchain.explorer.avax-test.network",
+        "nativeCurrency" : {
+            "symbol" : "AVAX",
+            "decimals" : 18
+        },
+        "wallets": [
+            "metamask",
+            "trustwallet",
+            "bitget",
+            "okx",
+            "xdefi"
+        ],
+        "currencies": [
+            {
+                "symbol" : "AVAX"
+            },
+            {
+                "symbol" :  "USDT",
+                "address" :  "0xFe143522938e253e5Feef14DB0732e9d96221D72"
+            }
+        ]
+    },
+    {
+        "id" : 80001,
+        "hexId" : "0x13881",
+        "mainnetId" : 137,
+        "code" : "evmchains",
+        "name" : "Polygon Mumbai Testnet",
+        "rpcUrl" : "https://rpc-mumbai.maticvigil.com/",
+        "explorerUrl" : "https://mumbai.polygonscan.com/",
+        "nativeCurrency" : {
+            "symbol" : "MATIC",
+            "decimals" : 18
+        },
+        "wallets": [
+            "metamask",
+            "trustwallet",
+            "bitget",
+            "okx",
+            "xdefi"
+        ],
+        "currencies": [
+            {
+                "symbol" : "MATIC"
+            },
+            {
+                "symbol" : "USDT",
+                "address" : "0xa02f6adc7926efebbd59fd43a84f4e0c0c91e832"
+            }
+        ]
+    },
+    {
+        "id" : 4002,
+        "hexId" : "0xfa2",
+        "mainnetId" : 250,
+        "code" : "evmchains",
+        "name" : "Fantom Testnet",
+        "rpcUrl" : "https://rpc.testnet.fantom.network/",
+        "explorerUrl" : "https://testnet.ftmscan.com/",
+        "nativeCurrency" : {
+            "symbol" : "FTM",
+            "decimals" : 18
+        },
+        "wallets": [
+            "metamask",
+            "trustwallet",
+            "bitget",
+            "okx",
+            "xdefi"
+        ],
+        "currencies": [
+            {
+                "symbol" : "FTM"
+            }
+        ]
+    }
+]

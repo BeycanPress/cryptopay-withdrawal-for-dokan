@@ -11,8 +11,10 @@ defined('ABSPATH') || exit;
 use BeycanPress\CryptoPay\Helpers;
 use BeycanPress\CryptoPay\Payment;
 use BeycanPress\CryptoPay\PluginHero\Hook;
-use BeycanPress\CryptoPay\Types\Data\PaymentDataType;
-use BeycanPress\CryptoPayLite\Services as LiteServices;
+// Lite
+use BeycanPress\CryptoPayLite\Settings\EvmChains;
+use BeycanPress\CryptoPayLite\Helpers as LiteHelpers;
+use BeycanPress\CryptoPayLite\Payment as LitePayment;
 use BeycanPress\CryptoPayLite\PluginHero\Hook as LiteHook;
 
 // @phpcs:ignore
@@ -27,6 +29,11 @@ class DokanCryptoPayWithdrawal
      * @var string
      */
     private string $key;
+
+    /**
+     * @var array<mixed>|null
+     */
+    private ?array $networks = null;
 
     /**
      * @var array<mixed>|null
@@ -59,7 +66,7 @@ class DokanCryptoPayWithdrawal
         if ($this->key == 'dokan_cryptopay') {
             Helpers::registerIntegration($this->key);
             Hook::addFilter('apply_discount_' . $this->key, '__return_false');
-            Hook::addFilter('receiver_' . $this->key, function (string $receiver, PaymentDataType $data) {
+            Hook::addFilter('receiver_' . $this->key, function (string $receiver, object $data) {
                 if ($data->getParams()->get('receiver')) {
                     return $data->getParams()->get('receiver');
                 }
@@ -67,7 +74,7 @@ class DokanCryptoPayWithdrawal
                 return $receiver;
             }, 10, 2);
         } else {
-            LiteServices::registerAddon($this->key);
+            LiteHelpers::registerIntegration($this->key);
             LiteHook::addFilter('apply_discount_' . $this->key, '__return_false');
             LiteHook::addFilter('receiver_' . $this->key, function (string $receiver, object $data) {
                 if (isset($data->params->receiver)) {
@@ -123,7 +130,7 @@ class DokanCryptoPayWithdrawal
             return false;
         }
 
-        if ($networkItem['code'] == 'evmBased') {
+        if ($networkItem['code'] == 'evmchains') {
             $res = $networkItem['id'] == $network->id;
         } else {
             $res = $networkItem['code'] == $network->code;
@@ -134,6 +141,24 @@ class DokanCryptoPayWithdrawal
         }
 
         return $res;
+    }
+
+    /**
+     * @return array<mixed>
+     */
+    private function getNetworksById(): array
+    {
+        if (LiteHelpers::getTestnetStatus()) {
+            $networks = file_get_contents(DOKAN_CRYPTOPAY_PATH . '/resources/testnets.json');
+        } else {
+            $networks = file_get_contents(DOKAN_CRYPTOPAY_PATH . '/resources/mainnets.json');
+        }
+
+        $networks = json_decode($networks, true);
+
+        return array_filter($networks, function ($network) {
+            return in_array($network['id'], EvmChains::getNetworks());
+        });
     }
 
     /**
@@ -148,9 +173,9 @@ class DokanCryptoPayWithdrawal
         $address = isset($settings['address']) ? $settings['address'] : '';
 
         if ($this->key == 'dokan_cryptopay') {
-            $networks = Helpers::getNetworks()->toArray();
+            $this->networks = Helpers::getNetworks()->toArray();
         } else {
-            $networks = LiteServices::getNetworks();
+            $this->networks = $this->getNetworksById();
         }
 
         ?>
@@ -162,7 +187,7 @@ class DokanCryptoPayWithdrawal
                 </div>
                 <div class="dokan-w12">
                     <select name="settings[<?php echo esc_attr($this->key) ?>][network]" class="dokan-form-control dokan-cryptopay-network">
-                        <?php foreach ($networks as $networkItem) : ?>
+                        <?php foreach ($this->networks as $networkItem) : ?>
                             <option value='<?php echo json_encode($networkItem) ?>' <?php echo $this->isSelected($network, $networkItem) ? 'selected' : ''; ?>>
                                 <?php echo esc_html($networkItem['name']) ?>
                             </option>
@@ -178,11 +203,16 @@ class DokanCryptoPayWithdrawal
                 </div>
                 <div class="dokan-w12">
                     <select name="settings[<?php echo esc_attr($this->key) ?>][currency]" class="dokan-form-control dokan-cryptopay-currency">
-                        <?php foreach ($this->currentNetwork['currencies'] as $currencyItem) : ?>
+                        <?php
+                        if (!$this->currentNetwork) {
+                            $this->currentNetwork = $this->networks[0];
+                        }
+                        foreach ($this->currentNetwork['currencies'] as $currencyItem) : ?>
                             <option value='<?php echo json_encode($currencyItem) ?>' <?php echo isset($currency->symbol) && $currencyItem['symbol'] == $currency->symbol ? 'selected' : ''; ?>>
                                 <?php echo esc_html($currencyItem['symbol']) ?>
                             </option>
-                        <?php endforeach; ?>
+                        <?php endforeach;
+                        ?>
                     </select>
                 </div>
             </div>
@@ -370,7 +400,7 @@ class DokanCryptoPayWithdrawal
         if ($this->key == 'dokan_cryptopay') {
             return (new Payment($this->key))->setConfirmation(false)->html();
         } else {
-            return LiteServices::preparePaymentProcess($this->key, false);
+            return (new LitePayment($this->key))->setConfirmation(false)->html();
         }
     }
 }

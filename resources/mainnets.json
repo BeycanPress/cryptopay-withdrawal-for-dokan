@@ -1,0 +1,155 @@
+[
+    {
+        "id" : 1,
+        "hexId" : "0x1",
+        "name" : "Ethereum",
+        "code" : "evmchains",
+        "rpcUrl" : "https://mainnet.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161",
+        "explorerUrl" : "https://etherscan.io/",
+        "nativeCurrency" : {
+            "symbol" : "ETH",
+            "decimals" : 18
+        },
+        "wallets": [
+            "metamask",
+            "trustwallet",
+            "bitget",
+            "okx",
+            "xdefi"
+        ],
+        "currencies": [
+            {
+                "symbol" : "ETH"
+            },
+            {
+                "symbol" : "USDT",
+                "address" : "0xdac17f958d2ee523a2206206994597c13d831ec7"
+            },
+            {
+                "symbol" : "USDC",
+                "address" : "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
+            },
+            {
+                "symbol" : "BUSD",
+                "address" : "0x4Fabb145d64652a948d72533023f6E7A623C7C53"
+            }
+        ]
+    },
+    {
+        "id" : 56,
+        "hexId" : "0x38",
+        "name" : "BNB Smart Chain",
+        "code" : "evmchains",
+        "rpcUrl" : "https://bsc-dataseed.binance.org/",
+        "explorerUrl" : "https://bscscan.com/",
+        "nativeCurrency" : {
+            "symbol" : "BNB",
+            "decimals" : 18
+        },
+        "wallets": [
+            "metamask",
+            "trustwallet",
+            "bitget",
+            "okx",
+            "xdefi",
+            "binancewallet"
+        ],
+        "currencies": [
+            {
+                "symbol" :  "BNB"
+            },
+            {
+                "symbol" :  "BUSD",
+                "address" :  "0xe9e7cea3dedca5984780bafc599bd69add087d56"
+            },
+            {
+                "symbol" :  "USDT",
+                "address" :  "0x55d398326f99059ff775485246999027b3197955"
+            },
+            {
+                "symbol" :  "USDC",
+                "address" :  "0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d"
+            }
+        ]
+    },
+    {
+        "id" : 43114,
+        "hexId" : "0xa86a",
+        "name" : "Avalanche C-Chain",
+        "code" : "evmchains",
+        "rpcUrl" : "https://api.avax.network/ext/bc/C/rpc",
+        "explorerUrl" : "https://cchain.explorer.avax.network/",
+        "nativeCurrency" : {
+            "symbol" : "AVAX",
+            "decimals" : 18
+        },
+        "wallets": [
+            "metamask",
+            "trustwallet",
+            "bitget",
+            "okx",
+            "xdefi"
+        ],
+        "currencies": [
+            {
+                "symbol" : "AVAX"
+            },
+            {
+                "symbol" :  "USDT",
+                "address" :  "0xde3a24028580884448a5397872046a019649b084"
+            }
+        ]
+    },
+    {
+        "id" : 137,
+        "hexId" : "0x89",
+        "name" : "Polygon",
+        "code" : "evmchains",
+        "rpcUrl" : "https://polygon-rpc.com/",
+        "explorerUrl" : "https://polygonscan.com/",
+        "nativeCurrency" : {
+            "symbol" : "MATIC",
+            "decimals" : 18
+        },
+        "wallets": [
+            "metamask",
+            "trustwallet",
+            "bitget",
+            "okx",
+            "xdefi"
+        ],
+        "currencies": [
+            {
+                "symbol" : "MATIC"
+            },
+            {
+                "symbol" :  "USDT",
+                "address" :  "0xc2132d05d31c914a87c6611c10748aeb04b58e8f"
+            }
+        ]
+    },
+    {
+        "id" : 250,
+        "hexId" : "0xfa",
+        "name" : "Fantom",
+        "code" : "evmchains",
+        "rpcUrl" : "https://rpc.fantom.network",
+        "explorerUrl" : "https://ftmscan.com/",
+        "nativeCurrency" : {
+            "symbol" : "FTM",
+            "decimals" : 18
+        },
+        "wallets": [
+            "metamask",
+            "trustwallet",
+            "bitget",
+            "okx",
+            "xdefi"
+        ],
+        "currencies": [
+            {
+                "symbol" : "FTM"
+            }
+        ]
+    }
+]
