@@ -7,9 +7,6 @@
         $(window).on('click', function(e) {
             if (e.target == modal[0]) {
                 modal.hide();
-                if (CryptoPayApp.reset) {
-                    CryptoPayApp.reset();
-                }
             }
         });
 
@@ -58,28 +55,33 @@
                     });
                 });
             } else if (key == 'dokan_cryptopay_lite') {
-                CryptoPayLite.networks = [
-                    details.network,
-                ];
-
-                CryptoPayApp = CryptoPayLite.startPayment({
+                let order = {
                     amount,
                     currency,
-                }, {
+                }
+
+                let params = {
                     receiver: details.receiver,
-                });
+                }
     
-                CryptoPayLite.hooks.transactionSent = (n, tx) => {
+                if (!CryptoPayApp) {
+                    CryptoPayApp = window.CryptoPayLiteApp.start(order, params);
+                } else {
+                    CryptoPayApp.reStart(order, params);
+                }
+
+                CryptoPayApp.store.config.set('networks', [details.network]);
+
+                window.CryptoPayLiteApp.events.add('transactionReceived', ({transaction}) => {
                     approve.trigger('click');
-                    cpHelpers.successPopup(CryptoPayLite.lang.transactionSent, `
-                        <a href="${tx.getUrl()}" target="_blank">
-                            ${CryptoPayLite.lang.openInExplorer}
+                    cplHelpers.successPopup(window.CryptoPayLiteLang.transactionSent, `
+                        <a href="${transaction.getUrl()}" target="_blank">
+                            ${window.CryptoPayLiteLang.openInExplorer}
                         </a>
                     `).then(() => {
                         modal.hide();
-                        CryptoPayApp.reset();
                     });
-                }
+                });
             }
             
         });
