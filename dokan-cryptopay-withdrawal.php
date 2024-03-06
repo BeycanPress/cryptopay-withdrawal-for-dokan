@@ -61,7 +61,7 @@ add_action('plugins_loaded', function (): void {
             $gateway = new DokanCryptoPayWithdrawal(esc_html__('CryptoPay Lite', 'dokan-cryptopay'), 'dokan_cryptopay_lite');
         }
 
-        if (isset($_GET['page']) && $_GET['page'] === 'dokan') {
+        if (isset($_GET['page']) && 'dokan' === $_GET['page']) {
             add_action('admin_enqueue_scripts', function (): void {
                 wp_enqueue_script('dokan-cryptopay', plugin_dir_url(__FILE__) . 'assets/js/main.js', ['jquery'], DOKAN_CRYPTOPAY_VERSION, true);
                 wp_localize_script('dokan-cryptopay', 'DokanCryptoPay', [

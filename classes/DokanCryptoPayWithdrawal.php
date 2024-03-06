@@ -59,11 +59,11 @@ class DokanCryptoPayWithdrawal
         add_filter('dokan_withdraw_method_additional_info', [$this, 'addWithdrawMethodAdditionalInfo'], 10, 2);
 
         // Actions
-        if (isset($_GET['page']) && $_GET['page'] == 'dokan') {
+        if (isset($_GET['page']) && 'dokan' == $_GET['page']) {
             add_action('admin_print_footer_scripts', [$this, 'withdrawDetails'], 99);
         }
 
-        if ($this->key == 'dokan_cryptopay') {
+        if ('dokan_cryptopay' == $this->key) {
             Helpers::registerIntegration($this->key);
             Hook::addFilter('apply_discount_' . $this->key, '__return_false');
             Hook::addFilter('receiver_' . $this->key, function (string $receiver, object $data) {
@@ -92,10 +92,10 @@ class DokanCryptoPayWithdrawal
      */
     public function addWithdrawMethod(array $methods): array
     {
-        $methods[$this->key] = array(
+        $methods[$this->key] = [
             'title'    => $this->title,
             'callback' => [$this, 'userSettingForm'],
-        );
+        ];
 
         return $methods;
     }
@@ -130,7 +130,7 @@ class DokanCryptoPayWithdrawal
             return false;
         }
 
-        if ($networkItem['code'] == 'evmchains') {
+        if ('evmchains' == $networkItem['code']) {
             $res = $networkItem['id'] == $network->id;
         } else {
             $res = $networkItem['code'] == $network->code;
@@ -172,7 +172,7 @@ class DokanCryptoPayWithdrawal
         $currency = isset($settings['currency']) ? json_decode($settings['currency']) : (object) [];
         $address = isset($settings['address']) ? $settings['address'] : '';
 
-        if ($this->key == 'dokan_cryptopay') {
+        if ('dokan_cryptopay' == $this->key) {
             $this->networks = Helpers::getNetworks()->toArray();
         } else {
             $this->networks = $this->getNetworksById();
@@ -397,7 +397,7 @@ class DokanCryptoPayWithdrawal
      */
     public function runCryptoPay(): string
     {
-        if ($this->key == 'dokan_cryptopay') {
+        if ('dokan_cryptopay' == $this->key) {
             return (new Payment($this->key))->setConfirmation(false)->html();
         } else {
             return (new LitePayment($this->key))->setConfirmation(false)->html();
