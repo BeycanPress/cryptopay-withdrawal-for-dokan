@@ -75,7 +75,20 @@ add_action('plugins_loaded', function (): void {
                 echo '
                     <div class="dokan-cryptopay-modal">
                         <div class="dokan-cryptopay-modal-content">
-                            ' . $gateway->runCryptoPay() . '
+                            ' .
+                            wp_kses(
+                                $gateway->runCryptoPay(),
+                                [
+                                    'div' => [
+                                        'id' => [],
+                                        'class' => [],
+                                        'style' => [],
+                                        'data-*' => [],
+                                        'data-loading' => []
+                                    ],
+                                ]
+                            )
+                            . '
                         </div>
                     </div>
                 ';

@@ -188,7 +188,7 @@ class DokanCryptoPayWithdrawal
                 <div class="dokan-w12">
                     <select name="settings[<?php echo esc_attr($this->key) ?>][network]" class="dokan-form-control dokan-cryptopay-network">
                         <?php foreach ($this->networks as $networkItem) : ?>
-                            <option value='<?php echo json_encode($networkItem) ?>' <?php echo $this->isSelected($network, $networkItem) ? 'selected' : ''; ?>>
+                            <option value='<?php echo wp_json_encode($networkItem) ?>' <?php echo esc_attr($this->isSelected($network, $networkItem) ? 'selected' : ''); ?>>
                                 <?php echo esc_html($networkItem['name']) ?>
                             </option>
                         <?php endforeach; ?>
@@ -208,7 +208,7 @@ class DokanCryptoPayWithdrawal
                             $this->currentNetwork = $this->networks[0];
                         }
                         foreach ($this->currentNetwork['currencies'] as $currencyItem) : ?>
-                            <option value='<?php echo json_encode($currencyItem) ?>' <?php echo isset($currency->symbol) && $currencyItem['symbol'] == $currency->symbol ? 'selected' : ''; ?>>
+                            <option value='<?php echo wp_json_encode($currencyItem) ?>' <?php echo esc_attr(isset($currency->symbol) && $currencyItem['symbol'] == $currency->symbol ? 'selected' : ''); ?>>
                                 <?php echo esc_html($currencyItem['symbol']) ?>
                             </option>
                         <?php endforeach;
@@ -371,8 +371,8 @@ class DokanCryptoPayWithdrawal
                                 anotherDetails = '';
                             }
                             details = status == 'pending' ? anotherDetails + `
-                            <button title="<?php echo sprintf(esc_attr__('Pay with %s', 'dokan-cryptopay'), $this->title) ?>" class="button button-small pay-with-cryptopay" data-key="<?php echo esc_attr($this->key); ?>" data-details='${JSON.stringify(data[method])}'>
-                                <?php echo sprintf(esc_html__('Pay with %s', 'dokan-cryptopay'), $this->title) ?>
+                            <button title="<?php echo esc_attr(sprintf(__('Pay with %s', 'dokan-cryptopay'), $this->title)) ?>" class="button button-small pay-with-cryptopay" data-key="<?php echo esc_attr($this->key); ?>" data-details='${JSON.stringify(data[method])}'>
+                                <?php echo esc_html(sprintf(__('Pay with %s', 'dokan-cryptopay'), $this->title)) ?>
                             </button>
                             ` : anotherDetails;
                         }
