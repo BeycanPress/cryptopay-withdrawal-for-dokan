@@ -2,6 +2,7 @@
 
     $(document).ready(() => {
         let CryptoPayApp;
+        const __ = wp.i18n.__;
         const modal = $(".dokan-cryptopay-modal");
 
         $(window).on('click', function(e) {
@@ -46,6 +47,8 @@
 
                 window.CryptoPayApp.events.add('transactionReceived', ({transaction}) => {
                     approve.trigger('click');
+                    $(this).prop('disabled', true)
+                    $(this).text(__('Processing...'))
                     cpHelpers.successPopup(window.CryptoPayLang.transactionSent, `
                         <a href="${transaction.getUrl()}" target="_blank">
                             ${window.CryptoPayLang.openInExplorer}
@@ -74,6 +77,8 @@
 
                 window.CryptoPayLiteApp.events.add('transactionReceived', ({transaction}) => {
                     approve.trigger('click');
+                    $(this).prop('disabled', true)
+                    $(this).text(__('Processing...'))
                     cplHelpers.successPopup(window.CryptoPayLiteLang.transactionSent, `
                         <a href="${transaction.getUrl()}" target="_blank">
                             ${window.CryptoPayLiteLang.openInExplorer}

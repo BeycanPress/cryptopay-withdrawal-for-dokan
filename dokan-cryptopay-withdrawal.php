@@ -63,7 +63,7 @@ add_action('plugins_loaded', function (): void {
 
         if (isset($_GET['page']) && 'dokan' === $_GET['page']) {
             add_action('admin_enqueue_scripts', function (): void {
-                wp_enqueue_script('dokan-cryptopay', plugin_dir_url(__FILE__) . 'assets/js/main.js', ['jquery'], DOKAN_CRYPTOPAY_VERSION, true);
+                wp_enqueue_script('dokan-cryptopay', plugin_dir_url(__FILE__) . 'assets/js/main.js', ['jquery', 'wp-i18n'], DOKAN_CRYPTOPAY_VERSION, true);
                 wp_localize_script('dokan-cryptopay', 'DokanCryptoPay', [
                     'currency' => get_woocommerce_currency(),
                     'apiUrl' => home_url('/wp-json/dokan/v1/withdraw/')
