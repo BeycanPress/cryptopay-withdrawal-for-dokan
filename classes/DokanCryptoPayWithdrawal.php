@@ -77,8 +77,8 @@ class DokanCryptoPayWithdrawal
             LiteHelpers::registerIntegration($this->key);
             LiteHook::addFilter('apply_discount_' . $this->key, '__return_false');
             LiteHook::addFilter('receiver_' . $this->key, function (string $receiver, object $data) {
-                if (isset($data->params->receiver)) {
-                    return $data->params->receiver;
+                if ($data->getParams()->get('receiver')) {
+                    return $data->getParams()->get('receiver');
                 }
 
                 return $receiver;
