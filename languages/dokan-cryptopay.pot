@@ -1,7 +1,7 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Dokan - CryptoPay Withdrawal\n"
+"Project-Id-Version: CryptoPay Withdrawal for Dokan\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-24 11:47+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
@@ -28,34 +28,34 @@ msgstr ""
 msgid "BeycanPress LLC"
 msgstr ""
 
-#: dokan-cryptopay-withdrawal.php:40 dokan-cryptopay-withdrawal.php:84
+#: cryptopay-withdrawal-for-dokan.php:40 cryptopay-withdrawal-for-dokan.php:84
 msgid "clicking here"
 msgstr ""
 
-#: dokan-cryptopay-withdrawal.php:55
+#: cryptopay-withdrawal-for-dokan.php:55
 msgid "CryptoPay"
 msgstr ""
 
-#: dokan-cryptopay-withdrawal.php:58
+#: cryptopay-withdrawal-for-dokan.php:58
 msgid "CryptoPay Lite"
 msgstr ""
 
 #. Name of the plugin
-msgid "Dokan - CryptoPay Withdrawal"
+msgid "CryptoPay Withdrawal for Dokan"
 msgstr ""
 
-#: dokan-cryptopay-withdrawal.php:84
+#: cryptopay-withdrawal-for-dokan.php:84
 #, php-format
 msgid ""
-"Dokan - CryptoPay Withdrawal: This plugin is an extra feature plugin so it "
+"CryptoPay Withdrawal for Dokan: This plugin is an extra feature plugin so it "
 "cannot do anything on its own. It needs CryptoPay to work. You can buy "
 "CryptoPay by %s."
 msgstr ""
 
-#: dokan-cryptopay-withdrawal.php:40
+#: cryptopay-withdrawal-for-dokan.php:40
 #, php-format
 msgid ""
-"Dokan - CryptoPay Withdrawal: This plugin is an extra feature plugin so it "
+"CryptoPay Withdrawal for Dokan: This plugin is an extra feature plugin so it "
 "cannot do anything on its own. It needs Dokan to work. You can buy download "
 "Dokan by %s."
 msgstr ""

@@ -2,7 +2,7 @@
 Contributors: BeycanPress
 Tags: Bitcoin, Ethereum, Binance Smart Chain, Blockchain, Networks, Cryptocurrency, Payments, Gateway, WordPress, Dokan
 Requires at least: 5.0
-Tested up to: 6.4.2
+Tested up to: 6.5.0
 Requires PHP: 8.1
 Stable Tag: 1.0.3
 Version: 1.0.3
@@ -38,8 +38,8 @@ You can easily translate with Loco translate.
 
 == Installation ==
 
-1. Upload the entire `/dokan-cryptopay-withdrawal` directory to the `/wp-content/plugins/` directory.
-2. Activate Dokan - CryptoPay Withdrawal through the 'Plugins' menu in WordPress.
+1. Upload the entire `/cryptopay-withdrawal-for-dokan` directory to the `/wp-content/plugins/` directory.
+2. Activate CryptoPay Withdrawal for Dokan through the 'Plugins' menu in WordPress.
 3. Enjoy.
 
 == Changelog ==

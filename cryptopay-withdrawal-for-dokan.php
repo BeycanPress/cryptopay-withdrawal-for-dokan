@@ -9,7 +9,7 @@ defined('ABSPATH') || exit;
 // @phpcs:disable Generic.Files.LineLength
 
 /**
- * Plugin Name: Dokan - CryptoPay Withdrawal
+ * Plugin Name: CryptoPay Withdrawal for Dokan
  * Version:     1.0.3
  * Plugin URI:  https://beycanpress.com/cryptopay/
  * Description: Add custom cryptocurrency withdrawal method to Dokan plugin
@@ -20,7 +20,7 @@ defined('ABSPATH') || exit;
  * Text Domain: dokan-cryptopay
  * Tags: Cryptopay, Cryptocurrency, WooCommerce, WordPress, MetaMask, Trust, Binance, Wallet, Ethereum, Bitcoin, Binance smart chain, Payment, Plugin, Gateway, Moralis, Converter, API, coin market cap, CMC
  * Requires at least: 5.0
- * Tested up to: 6.4.2
+ * Tested up to: 6.5.0
  * Requires PHP: 8.1
 */
 
@@ -40,7 +40,7 @@ add_action('plugins_loaded', function (): void {
     if (!function_exists('dokan')) {
         add_action('admin_notices', function (): void {
             $class = 'notice notice-error';
-            $message = sprintf(esc_html__('Dokan - CryptoPay Withdrawal: This plugin is an extra feature plugin so it cannot do anything on its own. It needs Dokan to work. You can buy download Dokan by %s.', 'dokan-cryptopay'), '<a href="https://wordpress.org/plugins/dokan-lite/" target="_blank">' . esc_html__('clicking here', 'dokan-cryptopay') . '</a>');
+            $message = sprintf(esc_html__('CryptoPay Withdrawal for Dokan: This plugin is an extra feature plugin so it cannot do anything on its own. It needs Dokan to work. You can buy download Dokan by %s.', 'dokan-cryptopay'), '<a href="https://wordpress.org/plugins/dokan-lite/" target="_blank">' . esc_html__('clicking here', 'dokan-cryptopay') . '</a>');
             printf('<div class="%1$s"><p>%2$s</p></div>', esc_attr($class), $message);
         });
         return;
@@ -51,7 +51,7 @@ add_action('plugins_loaded', function (): void {
             if (version_compare(Helpers::getProp('pluginVersion'), '2.1.0', '<')) {
                 add_action('admin_notices', function (): void {
                     $class = 'notice notice-error';
-                    $message = esc_html__('Dokan - CryptoPay Withdrawal requires CryptoPay version 2.1.0 or higher. Please update CryptoPay.', 'cryptopay');
+                    $message = esc_html__('CryptoPay Withdrawal for Dokan requires CryptoPay version 2.1.0 or higher. Please update CryptoPay.', 'cryptopay');
                     printf('<div class="%1$s"><p>%2$s</p></div>', esc_attr($class), esc_html($message));
                 });
             } else {
@@ -97,7 +97,7 @@ add_action('plugins_loaded', function (): void {
     } else {
         add_action('admin_notices', function (): void {
             $class = 'notice notice-error';
-            $message = sprintf(esc_html__('Dokan - CryptoPay Withdrawal: This plugin is an extra feature plugin so it cannot do anything on its own. It needs CryptoPay to work. You can buy CryptoPay by %s.', 'dokan-cryptopay'), '<a href="https://beycanpress.com/product/cryptopay-all-in-one-cryptocurrency-payments-for-wordpress/?utm_source=wp_org_addons&utm_medium=dokan" target="_blank">' . esc_html__('clicking here', 'dokan-cryptopay') . '</a>');
+            $message = sprintf(esc_html__('CryptoPay Withdrawal for Dokan: This plugin is an extra feature plugin so it cannot do anything on its own. It needs CryptoPay to work. You can buy CryptoPay by %s.', 'dokan-cryptopay'), '<a href="https://beycanpress.com/product/cryptopay-all-in-one-cryptocurrency-payments-for-wordpress/?utm_source=wp_org_addons&utm_medium=dokan" target="_blank">' . esc_html__('clicking here', 'dokan-cryptopay') . '</a>');
             printf('<div class="%1$s"><p>%2$s</p></div>', esc_attr($class), $message);
         });
     }
