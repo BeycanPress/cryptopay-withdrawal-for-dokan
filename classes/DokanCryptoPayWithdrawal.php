@@ -59,6 +59,7 @@ class DokanCryptoPayWithdrawal
         add_filter('dokan_withdraw_method_additional_info', [$this, 'addWithdrawMethodAdditionalInfo'], 10, 2);
 
         // Actions
+        // This a WordPress page detection
         if (isset($_GET['page']) && 'dokan' == $_GET['page']) {
             add_action('admin_print_footer_scripts', [$this, 'withdrawDetails'], 99);
         }
@@ -251,7 +252,7 @@ class DokanCryptoPayWithdrawal
                 $dokanSettings['payment'][$this->key] = array_map('sanitize_text_field', $postData['settings'][$this->key]);
                 $network = json_decode($dokanSettings['payment'][$this->key]['network']);
                 $network->currencies = [json_decode($dokanSettings['payment'][$this->key]['currency'])];
-                $dokanSettings['payment'][$this->key]['network'] = json_encode($network);
+                $dokanSettings['payment'][$this->key]['network'] = wp_json_encode($network);
                 $dokanSettings['payment'][$this->key]['user_id'] = dokan_get_current_user_id();
             }
         }
@@ -371,8 +372,14 @@ class DokanCryptoPayWithdrawal
                                 anotherDetails = '';
                             }
                             details = status == 'pending' ? anotherDetails + `
-                            <button title="<?php echo esc_attr(sprintf(__('Pay with %s', 'dokan-cryptopay'), $this->title)) ?>" class="button button-small pay-with-cryptopay" data-key="<?php echo esc_attr($this->key); ?>" data-details='${JSON.stringify(data[method])}'>
-                                <?php echo esc_html(sprintf(__('Pay with %s', 'dokan-cryptopay'), $this->title)) ?>
+                            <button title="<?php
+                                /* translators: %s: payment method title */
+                                echo esc_attr(sprintf(__('Pay with %s', 'dokan-cryptopay'), $this->title))
+                            ?>" class="button button-small pay-with-cryptopay" data-key="<?php echo esc_attr($this->key); ?>" data-details='${JSON.stringify(data[method])}'>
+                                <?php
+                                    // translators: %s: payment method title
+                                    echo esc_html(sprintf(__('Pay with %s', 'dokan-cryptopay'), $this->title))
+                                ?>
                             </button>
                             ` : anotherDetails;
                         }

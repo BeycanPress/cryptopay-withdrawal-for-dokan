@@ -40,8 +40,9 @@ add_action('plugins_loaded', function (): void {
     if (!function_exists('dokan')) {
         add_action('admin_notices', function (): void {
             $class = 'notice notice-error';
+            // translators: %s: Dokan plugin URL
             $message = sprintf(esc_html__('CryptoPay Withdrawal for Dokan: This plugin is an extra feature plugin so it cannot do anything on its own. It needs Dokan to work. You can buy download Dokan by %s.', 'dokan-cryptopay'), '<a href="https://wordpress.org/plugins/dokan-lite/" target="_blank">' . esc_html__('clicking here', 'dokan-cryptopay') . '</a>');
-            printf('<div class="%1$s"><p>%2$s</p></div>', esc_attr($class), $message);
+            printf('<div class="%1$s"><p>%2$s</p></div>', esc_attr($class), wp_kses_post($message));
         });
         return;
     }
@@ -61,6 +62,7 @@ add_action('plugins_loaded', function (): void {
             $gateway = new DokanCryptoPayWithdrawal(esc_html__('CryptoPay Lite', 'dokan-cryptopay'), 'dokan_cryptopay_lite');
         }
 
+        // This a WordPress page detection
         if (isset($_GET['page']) && 'dokan' === $_GET['page']) {
             add_action('admin_enqueue_scripts', function (): void {
                 wp_enqueue_script('dokan-cryptopay', plugin_dir_url(__FILE__) . 'assets/js/main.js', ['jquery', 'wp-i18n'], DOKAN_CRYPTOPAY_VERSION, true);
@@ -97,8 +99,9 @@ add_action('plugins_loaded', function (): void {
     } else {
         add_action('admin_notices', function (): void {
             $class = 'notice notice-error';
+            // translators: %s: CryptoPay plugin URL
             $message = sprintf(esc_html__('CryptoPay Withdrawal for Dokan: This plugin is an extra feature plugin so it cannot do anything on its own. It needs CryptoPay to work. You can buy CryptoPay by %s.', 'dokan-cryptopay'), '<a href="https://beycanpress.com/product/cryptopay-all-in-one-cryptocurrency-payments-for-wordpress/?utm_source=wp_org_addons&utm_medium=dokan" target="_blank">' . esc_html__('clicking here', 'dokan-cryptopay') . '</a>');
-            printf('<div class="%1$s"><p>%2$s</p></div>', esc_attr($class), $message);
+            printf('<div class="%1$s"><p>%2$s</p></div>', esc_attr($class), wp_kses_post($message));
         });
     }
 });
