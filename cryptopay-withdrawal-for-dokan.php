@@ -10,7 +10,7 @@ defined('ABSPATH') || exit;
 
 /**
  * Plugin Name: CryptoPay Withdrawal for Dokan
- * Version:     1.0.3
+ * Version:     1.0.4
  * Plugin URI:  https://beycanpress.com/cryptopay/
  * Description: Add custom cryptocurrency withdrawal method to Dokan plugin
  * Author:      BeycanPress LLC
@@ -20,7 +20,7 @@ defined('ABSPATH') || exit;
  * Text Domain: dokan-cryptopay
  * Tags: Cryptopay, Cryptocurrency, WooCommerce, WordPress, MetaMask, Trust, Binance, Wallet, Ethereum, Bitcoin, Binance smart chain, Payment, Plugin, Gateway, Moralis, Converter, API, coin market cap, CMC
  * Requires at least: 5.0
- * Tested up to: 6.5.0
+ * Tested up to: 6.5.4
  * Requires PHP: 8.1
 */
 

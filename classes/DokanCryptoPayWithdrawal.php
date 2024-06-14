@@ -163,11 +163,15 @@ class DokanCryptoPayWithdrawal
     }
 
     /**
-     * @param array<mixed> $args
+     * @param mixed $args
      * @return void
      */
-    public function userSettingForm(array $args): void
+    public function userSettingForm(mixed $args): void
     {
+        if (!is_array($args)) {
+            $args = [];
+        }
+
         $settings = isset($args['payment'][$this->key]) ? $args['payment'][$this->key] : [];
         $network = isset($settings['network']) ? json_decode($settings['network']) : (object) [];
         $currency = isset($settings['currency']) ? json_decode($settings['currency']) : (object) [];

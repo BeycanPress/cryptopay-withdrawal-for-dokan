@@ -2,10 +2,10 @@
 Contributors: BeycanPress
 Tags: Bitcoin, Ethereum, Cryptocurrency, Payments, Dokan
 Requires at least: 5.0
-Tested up to: 6.5.0
+Tested up to: 6.5.4
 Requires PHP: 8.1
-Stable Tag: 1.0.3
-Version: 1.0.3
+Stable Tag: 1.0.4
+Version: 1.0.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -44,11 +44,14 @@ You can easily translate with Loco translate.
 
 == Changelog ==
 
+= 1.0.4 =
+* Fixed: Type error in first installation
+
 = 1.0.2 =
 * Updated: Compatibility due to updates in CryptoPay 2.1.0
 
 = 1.0.1 =
-*Improved: For CryptoPay 2.0.0
+* Improved: For CryptoPay 2.0.0
 
 = 1.0.0 =
 * Plugin released.
