@@ -53,8 +53,8 @@ class DokanCryptoPayWithdrawal
         add_filter('dokan_withdraw_methods', [$this, 'addWithdrawMethod']);
         add_filter('dokan_withdraw_method_icon', [$this, 'addMethodIcon'], 10, 2);
         add_filter('dokan_store_profile_settings_args', [$this, 'saveSettings'], 10, 2);
-        add_filter('dokan_get_seller_active_withdraw_methods', [$this, 'activePaymentMethods']);
         add_filter('dokan_withdraw_withdrawable_payment_methods', [$this, 'withdrawPaymentMethods']);
+        add_filter('dokan_get_seller_active_withdraw_methods', [$this, 'activePaymentMethods'], 10, 2);
         add_filter('dokan_payment_settings_required_fields', [$this, 'addWithdrawInPaymentMethodList'], 10, 2);
         add_filter('dokan_withdraw_method_additional_info', [$this, 'addWithdrawMethodAdditionalInfo'], 10, 2);
 
@@ -266,11 +266,12 @@ class DokanCryptoPayWithdrawal
 
     /**
      * @param array<string> $activePaymentMethods
+     * @param int $vendorId
      * @return array<string>
      */
-    public function activePaymentMethods(array $activePaymentMethods): array
+    public function activePaymentMethods(array $activePaymentMethods, int $vendorId): array
     {
-        $settings = get_user_meta(dokan_get_current_user_id(), 'dokan_profile_settings');
+        $settings = get_user_meta($vendorId ? $vendorId : dokan_get_current_user_id(), 'dokan_profile_settings');
         $settings = isset($settings[0]['payment'][$this->key]) ? $settings[0]['payment'][$this->key] : [];
 
         if (isset($settings['address']) && !empty($settings['address'])) {
