@@ -10,7 +10,7 @@ defined('ABSPATH') || exit;
 
 /**
  * Plugin Name: CryptoPay Withdrawal for Dokan
- * Version:     1.0.5
+ * Version:     1.0.6
  * Plugin URI:  https://beycanpress.com/cryptopay/
  * Description: Add custom cryptocurrency withdrawal method to Dokan plugin
  * Author:      BeycanPress LLC
@@ -20,7 +20,7 @@ defined('ABSPATH') || exit;
  * Text Domain: dokan-cryptopay
  * Tags: Cryptopay, Cryptocurrency, WooCommerce, WordPress, MetaMask, Trust, Binance, Wallet, Ethereum, Bitcoin, Binance smart chain, Payment, Plugin, Gateway, Moralis, Converter, API, coin market cap, CMC
  * Requires at least: 5.0
- * Tested up to: 6.5.5
+ * Tested up to: 6.6
  * Requires PHP: 8.1
 */
 
@@ -29,7 +29,7 @@ use BeycanPress\CryptoPay\Helpers;
 use BeycanPress\CryptoPayLite\Loader as LiteLoader;
 
 define('DOKAN_CRYPTOPAY_FILE', __FILE__);
-define('DOKAN_CRYPTOPAY_VERSION', '1.0.3');
+define('DOKAN_CRYPTOPAY_VERSION', '1.0.6');
 define('DOKAN_CRYPTOPAY_URL', plugin_dir_url(__FILE__));
 define('DOKAN_CRYPTOPAY_PATH', plugin_dir_path(__FILE__));
 
@@ -70,30 +70,20 @@ add_action('plugins_loaded', function (): void {
                     'currency' => get_woocommerce_currency(),
                     'apiUrl' => home_url('/wp-json/dokan/v1/withdraw/')
                 ]);
-
-                wp_enqueue_style('dokan-cryptopay', plugin_dir_url(__FILE__) . 'assets/css/main.css', [], DOKAN_CRYPTOPAY_VERSION);
             });
             add_action('admin_footer', function () use ($gateway): void {
-                echo '
-                    <div class="dokan-cryptopay-modal">
-                        <div class="dokan-cryptopay-modal-content">
-                            ' .
-                            wp_kses(
-                                $gateway->runCryptoPay(),
-                                [
-                                    'div' => [
-                                        'id' => [],
-                                        'class' => [],
-                                        'style' => [],
-                                        'data-*' => [],
-                                        'data-loading' => []
-                                    ],
-                                ]
-                            )
-                            . '
-                        </div>
-                    </div>
-                ';
+                echo wp_kses(
+                    $gateway->runCryptoPay(),
+                    [
+                        'div' => [
+                            'id' => [],
+                            'class' => [],
+                            'style' => [],
+                            'data-*' => [],
+                            'data-loading' => []
+                        ],
+                    ]
+                );
             });
         }
     } else {

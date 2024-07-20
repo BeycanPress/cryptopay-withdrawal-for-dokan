@@ -2,10 +2,10 @@
 Contributors: BeycanPress
 Tags: Bitcoin, Ethereum, Cryptocurrency, Payments, Dokan
 Requires at least: 5.0
-Tested up to: 6.5.5
+Tested up to: 6.6
 Requires PHP: 8.1
-Stable Tag: 1.0.5
-Version: 1.0.5
+Stable Tag: 1.0.6
+Version: 1.0.6
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -43,6 +43,9 @@ You can easily translate with Loco translate.
 3. Enjoy.
 
 == Changelog ==
+
+= 1.0.6 =
+* Fixed: Configure for new versions
 
 = 1.0.5 =
 * Fixed: Withdrawal action process

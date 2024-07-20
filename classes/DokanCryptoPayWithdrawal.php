@@ -66,6 +66,7 @@ class DokanCryptoPayWithdrawal
 
         if ('dokan_cryptopay' == $this->key) {
             Helpers::registerIntegration($this->key);
+            Hook::addFilter('mode_' . $this->key, fn () => 'network');
             Hook::addFilter('apply_discount_' . $this->key, '__return_false');
             Hook::addFilter('receiver_' . $this->key, function (string $receiver, object $data) {
                 if ($data->getParams()->get('receiver')) {
@@ -76,6 +77,7 @@ class DokanCryptoPayWithdrawal
             }, 10, 2);
         } else {
             LiteHelpers::registerIntegration($this->key);
+            LiteHook::addFilter('mode_' . $this->key, fn () => 'network');
             LiteHook::addFilter('apply_discount_' . $this->key, '__return_false');
             LiteHook::addFilter('receiver_' . $this->key, function (string $receiver, object $data) {
                 if ($data->getParams()->get('receiver')) {
@@ -410,9 +412,9 @@ class DokanCryptoPayWithdrawal
     public function runCryptoPay(): string
     {
         if ('dokan_cryptopay' == $this->key) {
-            return (new Payment($this->key))->setConfirmation(false)->html();
+            return (new Payment($this->key))->setConfirmation(false)->modal();
         } else {
-            return (new LitePayment($this->key))->setConfirmation(false)->html();
+            return (new LitePayment($this->key))->setConfirmation(false)->modal();
         }
     }
 }
