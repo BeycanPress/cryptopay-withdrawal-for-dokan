@@ -11,13 +11,6 @@
             "symbol" : "ETH",
             "decimals" : 18
         },
-        "wallets": [
-            "metamask",
-            "trustwallet",
-            "bitget",
-            "okx",
-            "xdefi"
-        ],
         "currencies": [
             {
                 "symbol" : "ETH"
@@ -36,14 +29,6 @@
             "symbol" : "BNB",
             "decimals" : 18
         },
-        "wallets": [
-            "metamask",
-            "trustwallet",
-            "bitget",
-            "okx",
-            "xdefi",
-            "binancewallet"
-        ],
         "currencies": [
             {
                 "symbol" : "BNB"
@@ -70,13 +55,6 @@
             "symbol" : "AVAX",
             "decimals" : 18
         },
-        "wallets": [
-            "metamask",
-            "trustwallet",
-            "bitget",
-            "okx",
-            "xdefi"
-        ],
         "currencies": [
             {
                 "symbol" : "AVAX"
@@ -99,13 +77,6 @@
             "symbol" : "MATIC",
             "decimals" : 18
         },
-        "wallets": [
-            "metamask",
-            "trustwallet",
-            "bitget",
-            "okx",
-            "xdefi"
-        ],
         "currencies": [
             {
                 "symbol" : "MATIC"
@@ -128,13 +99,6 @@
             "symbol" : "FTM",
             "decimals" : 18
         },
-        "wallets": [
-            "metamask",
-            "trustwallet",
-            "bitget",
-            "okx",
-            "xdefi"
-        ],
         "currencies": [
             {
                 "symbol" : "FTM"
