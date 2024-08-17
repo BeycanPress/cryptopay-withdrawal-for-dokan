@@ -185,6 +185,8 @@ class DokanCryptoPayWithdrawal
             $this->networks = $this->getNetworksById();
         }
 
+        wp_enqueue_script('dokan-cryptopay', plugin_dir_url(__FILE__) . 'assets/js/main.js', ['jquery'], DOKAN_CRYPTOPAY_VERSION, true);
+
         ?>
             <div class="dokan-form-group">
                 <div>
@@ -233,14 +235,6 @@ class DokanCryptoPayWithdrawal
                     <input value="<?php echo esc_attr($address); ?>" name="settings[<?php echo esc_attr($this->key) ?>][address]" class="dokan-form-control" type="text">
                 </div>
             </div>
-            <script>
-                jQuery(document).on('change', '.dokan-cryptopay-network', function(e) {
-                    let currencies = JSON.parse(jQuery(this).val()).currencies;
-                    jQuery('.dokan-cryptopay-currency').html(`
-                        ${currencies.map(currency => `<option value='${JSON.stringify(currency)}'>${currency.symbol}</option>`).join('')}
-                    `);
-                });
-            </script>
         <?php
     }
 
