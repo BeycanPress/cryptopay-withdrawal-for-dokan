@@ -7,6 +7,7 @@ defined('ABSPATH') || exit;
 // @phpcs:disable PSR1.Files.SideEffects
 // @phpcs:disable Generic.Files.InlineHTML
 // @phpcs:disable Generic.Files.LineLength
+// @phpcs:disable WordPress.Security.NonceVerification.Recommended
 
 use BeycanPress\CryptoPay\Helpers;
 use BeycanPress\CryptoPay\Payment;
@@ -191,7 +192,7 @@ class DokanCryptoPayWithdrawal
             <div class="dokan-form-group">
                 <div>
                     <label>
-                        <?php esc_html_e('Payment network', 'dokan-cryptopay'); ?>
+                        <?php esc_html_e('Payment network', 'cryptopay-withdrawal-for-dokan'); ?>
                     </label>
                 </div>
                 <div class="dokan-w12">
@@ -207,7 +208,7 @@ class DokanCryptoPayWithdrawal
             <div class="dokan-form-group">
                 <div>
                     <label>
-                        <?php esc_html_e('Payment currency', 'dokan-cryptopay'); ?>
+                        <?php esc_html_e('Payment currency', 'cryptopay-withdrawal-for-dokan'); ?>
                     </label>
                 </div>
                 <div class="dokan-w12">
@@ -228,7 +229,7 @@ class DokanCryptoPayWithdrawal
             <div class="dokan-form-group">
                 <div>
                     <label>
-                        <?php esc_html_e('Address', 'dokan-cryptopay'); ?>
+                        <?php esc_html_e('Address', 'cryptopay-withdrawal-for-dokan'); ?>
                     </label>
                 </div>
                 <div class="dokan-w12">
@@ -356,15 +357,15 @@ class DokanCryptoPayWithdrawal
                             if (network && network) {
                                 anotherDetails = `
                                 <p>
-                                    <label><?php echo esc_html__('Network:'); ?></label>
+                                    <label><?php echo esc_html__('Network:', 'cryptopay-withdrawal-for-dokan'); ?></label>
                                     ${network.name}
                                 </p>
                                 <p>
-                                    <label><?php echo esc_html__('Currency:'); ?></label>
+                                    <label><?php echo esc_html__('Currency:', 'cryptopay-withdrawal-for-dokan'); ?></label>
                                     ${currency.symbol}
                                 </p>
                                 <p>
-                                    <label><?php echo esc_html__('Address:'); ?></label>
+                                    <label><?php echo esc_html__('Address:', 'cryptopay-withdrawal-for-dokan'); ?></label>
                                     ${data[method].address}
                                 </p>
                                 <br>
@@ -375,11 +376,11 @@ class DokanCryptoPayWithdrawal
                             details = status == 'pending' ? anotherDetails + `
                             <button title="<?php
                                 /* translators: %s: payment method title */
-                                echo esc_attr(sprintf(__('Pay with %s', 'dokan-cryptopay'), $this->title))
+                                echo esc_attr(sprintf(__('Pay with %s', 'cryptopay-withdrawal-for-dokan'), $this->title))
                             ?>" class="button button-small pay-with-cryptopay" data-key="<?php echo esc_attr($this->key); ?>" data-details='${JSON.stringify(data[method])}'>
                                 <?php
                                     // translators: %s: payment method title
-                                    echo esc_html(sprintf(__('Pay with %s', 'dokan-cryptopay'), $this->title))
+                                    echo esc_html(sprintf(__('Pay with %s', 'cryptopay-withdrawal-for-dokan'), $this->title))
                                 ?>
                             </button>
                             ` : anotherDetails;
