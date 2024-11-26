@@ -1,0 +1,104 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: CryptoPay Withdrawal for Dokan\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-11-26 11:13+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.6.11; wp-6.6.2\n"
+"X-Domain: cryptopay-withdrawal-for-dokan"
+
+#. Description of the plugin
+msgid "Add custom cryptocurrency withdrawal method to Dokan plugin"
+msgstr ""
+
+#: classes/DokanCryptoPayWithdrawal.php:232
+msgid "Address"
+msgstr ""
+
+#: classes/DokanCryptoPayWithdrawal.php:368
+msgid "Address:"
+msgstr ""
+
+#. Author of the plugin
+msgid "BeycanPress LLC"
+msgstr ""
+
+#: cryptopay-withdrawal-for-dokan.php:45 cryptopay-withdrawal-for-dokan.php:94
+msgid "clicking here"
+msgstr ""
+
+#: cryptopay-withdrawal-for-dokan.php:60
+msgid "CryptoPay"
+msgstr ""
+
+#: cryptopay-withdrawal-for-dokan.php:63
+msgid "CryptoPay Lite"
+msgstr ""
+
+#. Name of the plugin
+msgid "CryptoPay Withdrawal for Dokan"
+msgstr ""
+
+#: cryptopay-withdrawal-for-dokan.php:56
+msgid ""
+"CryptoPay Withdrawal for Dokan requires CryptoPay version 2.1.0 or higher. "
+"Please update CryptoPay."
+msgstr ""
+
+#. %s: CryptoPay plugin URL
+#: cryptopay-withdrawal-for-dokan.php:94
+#, php-format
+msgid ""
+"CryptoPay Withdrawal for Dokan: This plugin is an extra feature plugin so it "
+"cannot do anything on its own. It needs CryptoPay to work. You can buy "
+"CryptoPay by %s."
+msgstr ""
+
+#. %s: Dokan plugin URL
+#: cryptopay-withdrawal-for-dokan.php:45
+#, php-format
+msgid ""
+"CryptoPay Withdrawal for Dokan: This plugin is an extra feature plugin so it "
+"cannot do anything on its own. It needs Dokan to work. You can buy download "
+"Dokan by %s."
+msgstr ""
+
+#: classes/DokanCryptoPayWithdrawal.php:364
+msgid "Currency:"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://beycanpress.com"
+msgstr ""
+
+#. URI of the plugin
+msgid "https://beycanpress.com/cryptopay/"
+msgstr ""
+
+#: classes/DokanCryptoPayWithdrawal.php:360
+msgid "Network:"
+msgstr ""
+
+#. %s: payment method title
+#: classes/DokanCryptoPayWithdrawal.php:379
+#: classes/DokanCryptoPayWithdrawal.php:383
+#, php-format
+msgid "Pay with %s"
+msgstr ""
+
+#: classes/DokanCryptoPayWithdrawal.php:211
+msgid "Payment currency"
+msgstr ""
+
+#: classes/DokanCryptoPayWithdrawal.php:195
+msgid "Payment network"
+msgstr ""
