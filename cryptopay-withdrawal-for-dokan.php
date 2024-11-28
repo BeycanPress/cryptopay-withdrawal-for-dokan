@@ -34,15 +34,18 @@ define('DOKAN_CRYPTOPAY_VERSION', '1.0.6');
 define('DOKAN_CRYPTOPAY_URL', plugin_dir_url(__FILE__));
 define('DOKAN_CRYPTOPAY_PATH', plugin_dir_path(__FILE__));
 
+add_action('init', function (): void {
+    load_plugin_textdomain('cryptopay-withdrawal-for-dokan', false, basename(__DIR__) . '/languages');
+});
+
 add_action('plugins_loaded', function (): void {
     require_once __DIR__ . '/classes/DokanCryptoPayWithdrawal.php';
-    load_plugin_textdomain('cryptopay-withdrawal-for-dokan', false, basename(__DIR__) . '/languages');
 
     if (!function_exists('dokan')) {
         add_action('admin_notices', function (): void {
             $class = 'notice notice-error';
             // translators: %s: Dokan plugin URL
-            $message = sprintf(esc_html__('CryptoPay Withdrawal for Dokan: This plugin is an extra feature plugin so it cannot do anything on its own. It needs Dokan to work. You can buy download Dokan by %s.', 'cryptopay-withdrawal-for-dokan'), '<a href="https://wordpress.org/plugins/dokan-lite/" target="_blank">' . esc_html__('clicking here', 'cryptopay-withdrawal-for-dokan') . '</a>');
+            $message = sprintf(esc_html__('CryptoPay Withdrawal for Dokan: This plugin is an extra feature plugin so it cannot do anything on its own. It needs Dokan to work. You can buy download Dokan by %s.', 'cryptopay-withdrawal-for-dokan'), '<a href="' . admin_url('plugin-install.php?s=Dokan&tab=search&type=term') . '">' . esc_html__('clicking here', 'cryptopay-withdrawal-for-dokan') . '</a>');
             printf('<div class="%1$s"><p>%2$s</p></div>', esc_attr($class), wp_kses_post($message));
         });
         return;
