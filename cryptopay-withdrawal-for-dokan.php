@@ -11,7 +11,7 @@ defined('ABSPATH') || exit;
 
 /**
  * Plugin Name: CryptoPay Withdrawal for Dokan
- * Version:     1.0.6
+ * Version:     1.0.7
  * Plugin URI:  https://beycanpress.com/cryptopay/
  * Description: Add custom cryptocurrency withdrawal method to Dokan plugin
  * Author:      BeycanPress LLC
@@ -30,7 +30,7 @@ use BeycanPress\CryptoPay\Helpers;
 use BeycanPress\CryptoPayLite\Loader as LiteLoader;
 
 define('DOKAN_CRYPTOPAY_FILE', __FILE__);
-define('DOKAN_CRYPTOPAY_VERSION', '1.0.6');
+define('DOKAN_CRYPTOPAY_VERSION', '1.0.7');
 define('DOKAN_CRYPTOPAY_URL', plugin_dir_url(__FILE__));
 define('DOKAN_CRYPTOPAY_PATH', plugin_dir_path(__FILE__));
 
@@ -72,7 +72,9 @@ add_action('plugins_loaded', function (): void {
                 wp_enqueue_script('dokan-cryptopay', plugin_dir_url(__FILE__) . 'assets/js/admin.js', ['jquery', 'wp-i18n'], DOKAN_CRYPTOPAY_VERSION, true);
                 wp_localize_script('dokan-cryptopay', 'DokanCryptoPay', [
                     'currency' => get_woocommerce_currency(),
-                    'apiUrl' => home_url('/wp-json/dokan/v1/withdraw/')
+                    'apiUrl' => home_url('/wp-json/dokan/v1/withdraw/'),
+                    'key' => class_exists(Loader::class) ? 'dokan_cryptopay' : 'dokan_cryptopay_lite',
+                    'title' => class_exists(Loader::class) ? esc_html__('CryptoPay', 'cryptopay-withdrawal-for-dokan') : esc_html__('CryptoPay Lite', 'cryptopay-withdrawal-for-dokan'),
                 ]);
             });
             add_action('admin_footer', function () use ($gateway): void {

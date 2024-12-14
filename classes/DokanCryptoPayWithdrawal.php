@@ -59,12 +59,6 @@ class DokanCryptoPayWithdrawal
         add_filter('dokan_payment_settings_required_fields', [$this, 'addWithdrawInPaymentMethodList'], 10, 2);
         add_filter('dokan_withdraw_method_additional_info', [$this, 'addWithdrawMethodAdditionalInfo'], 10, 2);
 
-        // Actions
-        // This a WordPress page detection
-        if (isset($_GET['page']) && 'dokan' == $_GET['page']) {
-            add_action('admin_print_footer_scripts', [$this, 'withdrawDetails'], 99);
-        }
-
         if ('dokan_cryptopay' == $this->key) {
             Helpers::registerIntegration($this->key);
             Hook::addFilter('mode_' . $this->key, fn () => 'network');
@@ -326,79 +320,6 @@ class DokanCryptoPayWithdrawal
         }
 
         return $methodInfo;
-    }
-
-    /**
-     * @return void
-     */
-    public function withdrawDetails(): void
-    {
-        ?>
-            <script>
-                function jsonStringToObject(str) {
-                    try {
-                        return JSON.parse(str);
-                    } catch (e) {
-                        return null;
-                    }
-                }
-
-                function getCustomPaymentDetails(details, method, data) {
-                    const url = window.location.href;
-                    const regex = /[?&]status=(\w+)/;
-                    const match = url.match(regex);
-                    const status = match ? match[1] : null;
-
-                    if (data[method] !== undefined) {
-                        if ('<?php echo esc_js($this->key) ?>' === method) {
-                            let anotherDetails;
-                            let network = jsonStringToObject(data[method].network);
-                            let currency = jsonStringToObject(data[method].currency);
-                            if (network && network) {
-                                anotherDetails = `
-                                <p>
-                                    <label><?php echo esc_html__('Network:', 'cryptopay-withdrawal-for-dokan'); ?></label>
-                                    ${network.name}
-                                </p>
-                                <p>
-                                    <label><?php echo esc_html__('Currency:', 'cryptopay-withdrawal-for-dokan'); ?></label>
-                                    ${currency.symbol}
-                                </p>
-                                <p>
-                                    <label><?php echo esc_html__('Address:', 'cryptopay-withdrawal-for-dokan'); ?></label>
-                                    ${data[method].address}
-                                </p>
-                                <br>
-                            `;
-                            } else {
-                                anotherDetails = '';
-                            }
-                            details = status == 'pending' ? anotherDetails + `
-                            <button title="<?php
-                                /* translators: %s: payment method title */
-                                echo esc_attr(sprintf(__('Pay with %s', 'cryptopay-withdrawal-for-dokan'), $this->title))
-                            ?>" class="button button-small pay-with-cryptopay" data-key="<?php echo esc_attr($this->key); ?>" data-details='${JSON.stringify(data[method])}'>
-                                <?php
-                                    // translators: %s: payment method title
-                                    echo esc_html(sprintf(__('Pay with %s', 'cryptopay-withdrawal-for-dokan'), $this->title))
-                                ?>
-                            </button>
-                            ` : anotherDetails;
-                        }
-                    }
-
-                    return details;
-                }
-
-                dokan.hooks.addFilter(
-                    'dokan_get_payment_details',
-                    'getCustomPaymentDetails',
-                    getCustomPaymentDetails,
-                    33,
-                    3
-                );
-            </script>
-        <?php
     }
 
     /**

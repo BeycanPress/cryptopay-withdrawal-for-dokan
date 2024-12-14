@@ -4,6 +4,64 @@
         let CryptoPayApp;
         const __ = wp.i18n.__;
 
+
+        function jsonStringToObject(str) {
+            try {
+                return JSON.parse(str);
+            } catch (e) {
+                return null;
+            }
+        }
+
+        function getCustomPaymentDetails(details, method, data) {
+            const url = window.location.href;
+            const regex = /[?&]status=(\w+)/;
+            const match = url.match(regex);
+            const status = match ? match[1] : null;
+
+            if (data[method] !== undefined) {
+                if (DokanCryptoPay.key === method) {
+                    let anotherDetails;
+                    let network = jsonStringToObject(data[method].network);
+                    let currency = jsonStringToObject(data[method].currency);
+                    if (network && network) {
+                        anotherDetails = `
+                        <p>
+                            <label>${__('Network:', 'cryptopay-withdrawal-for-dokan')}</label>
+                            ${network.name}
+                        </p>
+                        <p>
+                            <label>${__('Currency:', 'cryptopay-withdrawal-for-dokan')}</label>
+                            ${currency.symbol}
+                        </p>
+                        <p>
+                            <label>${__('Address:', 'cryptopay-withdrawal-for-dokan')}</label>
+                            ${data[method].address}
+                        </p>
+                        <br>
+                    `;
+                    } else {
+                        anotherDetails = '';
+                    }
+                    details = status == 'pending' ? anotherDetails + `
+                    <button title="${__('Pay with {title}', 'cryptopay-withdrawal-for-dokan').replace('{title}', DokanCryptoPay.title)}" class="button button-small pay-with-cryptopay" data-key="${DokanCryptoPay.key}" data-details='${JSON.stringify(data[method])}'>
+                        ${__('Pay with {title}', 'cryptopay-withdrawal-for-dokan').replace('{title}', DokanCryptoPay.title)}
+                    </button>
+                    ` : anotherDetails;
+                }
+            }
+
+            return details;
+        }
+
+        dokan.hooks.addFilter(
+            'dokan_get_payment_details',
+            'getCustomPaymentDetails',
+            getCustomPaymentDetails,
+            33,
+            3
+        );
+
         $(document).on('click', '.pay-with-cryptopay', async function() {
             let key = $(this).data('key');
             let parent = $(this).closest('tr');
