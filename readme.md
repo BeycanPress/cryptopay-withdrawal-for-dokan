@@ -1,15 +1,14 @@
 ## Cryptocurrency Payment Withdrawal Method for Dokan by CryptoPay
 
-First of all, we would like to point out that this plugin is not a standalone plugin. This plugin is a cryptocurrency payment withdrawal method for Dokan. In other words, your users can request withdrawals with cryptocurrencies through Dokan. But this plugin is a plugin for CryptoPay and a **<a href="https://beycanpress.com/cryptopay/?utm_source=github&utm_medium=cryptopay_dokan">Cryptocurrency payment withdrawal</a>** plugin for Dokan. So, CryptoPay is the main plugin that manages the process of requesting and sending payments with cryptocurrencies from your WordPress site with the Dokan plugin. Therefore, users must have both plugins. While this plugin is the cryptocurrency payment withdrawal method for Dokan, you can receive **<a href="https://beycanpress.com/cryptopay/?utm_source=github&utm_medium=cryptopay_dokan">cryptocurrency payments for WordPress</a>** in general with the main plugin.
-What is CryptoPay? (Click and watch video)
+### What does this plugin do?
 
-[![Cryptocurrency payment gateway for WordPress](https://img.youtube.com/vi/3vaoFL4XG10/0.jpg)](https://www.youtube.com/watch?v=3vaoFL4XG10)
-<br>
+CryptoPay is essentially a cryptocurrency payment gateway, but with its modular structure, it can be integrated into many processes. With our Dokan Withdrawal integration, you will be able to accept crypto payments with CryptoPay and also pay your vendors in crypto.
 
-Review CryptoPay Lite: **<a href="https://wordpress.org/plugins/cryptopay-wc-lite/" title="Cryptocurrency payment withdrawal for Dokan">Cryptocurrency payment withdrawal for Dokan</a>**
+### How does it work?
 
-Review CryptoPay Premium: **<a href="https://beycanpress.com/cryptopay/?utm_source=github&utm_medium=cryptopay_dokan">Cryptocurrency payments for WooCommerce</a>**
+As you can see in the pictures, all you need to do is activate CryptoPay in the withdrawal settings, then as you can see in picture two, vendors can specify the blockchain network and currency they want to receive payments from their dashboards, then when they create a withdrawal request, all you need to do is pay with CryptoPay as in picture 3.
 
-Review Dokan: **<a href="https://wordpress.org/plugins/dokan-lite/">Dokan</a>**
 
-Bitcoin, Ethereum, Binance, Solana, Tron, Avalanche, Polygon, MetaMask, TrustWallet, WalletConnect, Phantom Cryptocurrency payments gateway plugin for WordPress & WooCommerce, cryptocurrency wordpress, cryptocurrency woocommerce, cryptocurrency payments, cryptocurrency payments gateway, cryptocurrency payments for woocommerce, cryptocurrency payments for wordpress, bitcoin payment for wordpress, woocommerce crypto payments, wordpress crypto payments, wordPress cryptocurrency payment plugin, woocommerce cryptocurrency payment gateway, cryptocurrency payment gateway for woocommerce, crypto payments woocommerce, accept cryptocurrency payments
+![Screenshot-1](https://i.hizliresim.com/6ha8exe.png)
+![Screenshot-2](https://i.hizliresim.com/hkdi3hz.png)
+![Screenshot-3](https://i.hizliresim.com/47quh0e.png)
