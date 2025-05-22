@@ -11,7 +11,7 @@ defined('ABSPATH') || exit;
 
 /**
  * Plugin Name: CryptoPay Withdrawal for Dokan
- * Version:     1.0.7
+ * Version:     1.0.8
  * Plugin URI:  https://beycanpress.com/cryptopay/
  * Description: Add custom cryptocurrency withdrawal method to Dokan plugin
  * Author:      BeycanPress LLC
@@ -21,16 +21,16 @@ defined('ABSPATH') || exit;
  * Text Domain: cryptopay-withdrawal-for-dokan
  * Tags: Cryptopay, Cryptocurrency, WooCommerce, WordPress, MetaMask, Trust, Binance, Wallet, Ethereum, Bitcoin, Binance smart chain, Payment, Plugin, Gateway, Moralis, Converter, API, coin market cap, CMC
  * Requires at least: 5.0
- * Tested up to: 6.7.1
+ * Tested up to: 6.8
  * Requires PHP: 8.1
-*/
+ */
 
 use BeycanPress\CryptoPay\Loader;
 use BeycanPress\CryptoPay\Helpers;
 use BeycanPress\CryptoPayLite\Loader as LiteLoader;
 
 define('DOKAN_CRYPTOPAY_FILE', __FILE__);
-define('DOKAN_CRYPTOPAY_VERSION', '1.0.7');
+define('DOKAN_CRYPTOPAY_VERSION', '1.0.8');
 define('DOKAN_CRYPTOPAY_URL', plugin_dir_url(__FILE__));
 define('DOKAN_CRYPTOPAY_PATH', plugin_dir_path(__FILE__));
 
@@ -60,10 +60,10 @@ add_action('plugins_loaded', function (): void {
                     printf('<div class="%1$s"><p>%2$s</p></div>', esc_attr($class), esc_html($message));
                 });
             } else {
-                $gateway = new DokanCryptoPayWithdrawal(esc_html__('CryptoPay', 'cryptopay-withdrawal-for-dokan'), 'dokan_cryptopay');
+                $gateway = new DokanCryptoPayWithdrawal('CryptoPay', 'dokan_cryptopay');
             }
         } elseif (class_exists(LiteLoader::class)) {
-            $gateway = new DokanCryptoPayWithdrawal(esc_html__('CryptoPay Lite', 'cryptopay-withdrawal-for-dokan'), 'dokan_cryptopay_lite');
+            $gateway = new DokanCryptoPayWithdrawal('CryptoPay Lite', 'dokan_cryptopay_lite');
         }
 
         // This a WordPress page detection
@@ -74,7 +74,7 @@ add_action('plugins_loaded', function (): void {
                     'currency' => get_woocommerce_currency(),
                     'apiUrl' => home_url('/wp-json/dokan/v1/withdraw/'),
                     'key' => class_exists(Loader::class) ? 'dokan_cryptopay' : 'dokan_cryptopay_lite',
-                    'title' => class_exists(Loader::class) ? esc_html__('CryptoPay', 'cryptopay-withdrawal-for-dokan') : esc_html__('CryptoPay Lite', 'cryptopay-withdrawal-for-dokan'),
+                    'title' => class_exists(Loader::class) ? 'CryptoPay' : 'CryptoPay Lite',
                 ]);
             });
             add_action('admin_footer', function () use ($gateway): void {
